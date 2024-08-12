@@ -1,0 +1,75 @@
+version: '1'
+
+services:
+
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: gunicorn ml_project.wsgi:application --bind 0.0.0.0:8000
+    ports:
+      - '8000:8000'
+    environment:
+      - POSTGRES_DB=postgres_latest
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DEBUG=1
+      - SECRET_KEY=foo
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,[::1]
+    depends_on:
+      - redis
+      - db
+    volumes:
+      - .:/code
+    restart: always
+
+
+  db:
+    image: postgres
+    volumes:
+      - postgres_data_new:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres_latest
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    restart: always
+
+  redis:
+    image: redis:6-alpine
+    restart: always
+
+  celery_worker:
+    build:
+      context: ./
+    command: celery -A ml_project worker -l info
+    environment:
+      - POSTGRES_DB=postgres_latest
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DEBUG=1
+      - SECRET_KEY=foo
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,[::1]
+    depends_on:
+      - redis
+      - web
+      - db
+    restart: always
+
+
+  celery_beat:
+    build:
+      context: ./
+    command: celery -A ml_project beat -l info
+    environment:
+      - POSTGRES_DB=postgres_latest
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - DEBUG=1
+      - SECRET_KEY=foo
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,[::1]
+    depends_on:
+      - redis
+    restart: always
+
+volumes:
+  postgres_data_new:
