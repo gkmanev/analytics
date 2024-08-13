@@ -26,13 +26,13 @@ class ForecastViewSet(viewsets.ModelViewSet):
             today = timezone.now().date()
 
             if date_range == 'today':
-                queryset = queryset.filter(date__date=today)
+                queryset = queryset.filter(timestamp=today)
             elif date_range == 'month':
                 first_day_of_month = today.replace(day=1)
-                queryset = queryset.filter(date__date__gte=first_day_of_month, date__date__lte=today)
+                queryset = queryset.filter(timestamp__gte=first_day_of_month, timestamp__lte=today)
             elif date_range == 'year':
                 first_day_of_year = today.replace(month=1, day=1)
-                queryset = queryset.filter(date__date__gte=first_day_of_year, date__date__lte=today)
+                queryset = queryset.filter(timestamp__gte=first_day_of_year, timestamp__lte=today)
         return queryset
 
 
