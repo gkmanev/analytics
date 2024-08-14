@@ -6,7 +6,6 @@ from datetime import datetime
 from django.utils import timezone
 
 
-
 class ForecastViewSet(viewsets.ModelViewSet):
     queryset = Forecast.objects.all()
     serializer_class = ForecastSerializer
@@ -14,8 +13,7 @@ class ForecastViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset =  super().get_queryset()
         dev_id = self.request.query_params.get('devId', None)
-        date_range = self.request.query_params.get('date_range',None) 
-        
+        date_range = self.request.query_params.get('date_range',None)        
        
         # Optionally, filter queryset based on devId
         if dev_id:
@@ -23,10 +21,9 @@ class ForecastViewSet(viewsets.ModelViewSet):
 
         # Filter by date_range if provided
         if date_range:
-            today = timezone.now().date()
-
+            today = timezone.now().date() 
             if date_range == 'today':
-                queryset = queryset.filter(timestamp=today)
+                queryset = queryset.filter(timestamp__gte=today)
             elif date_range == 'month':
                 first_day_of_month = today.replace(day=1)
                 queryset = queryset.filter(timestamp__gte=first_day_of_month, timestamp__lte=today)
