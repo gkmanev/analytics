@@ -32,6 +32,11 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '85.14.6.37', '192.168.1.32']
 
 CORS_ORIGIN_ALLOW_ALL=True
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+    "http://85.14.6.37",  # Include your server's IP here
+]
+
 
 # Application definition
 
