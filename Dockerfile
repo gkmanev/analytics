@@ -8,6 +8,9 @@ ENV PYTHONUNBUFFERED 1
 # Set the working directory in the container
 WORKDIR /app
 
+# Install cmake and any other necessary build dependencies
+RUN apt-get update && apt-get install -y cmake build-essential
+
 # Copy the dependencies file to the working directory
 COPY requirements.txt /app/
 
