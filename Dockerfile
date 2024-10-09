@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 
 # Install cmake and any other necessary build dependencies
-RUN apt-get update && apt-get install -y cmake build-essential
+RUN apt-get update && apt-get install -y cmake build-essential protobuf-compiler
 
 # Copy the dependencies file to the working directory
 COPY requirements.txt /app/
