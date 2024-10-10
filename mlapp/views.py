@@ -11,7 +11,7 @@ class ForecastViewSet(viewsets.ModelViewSet):
     serializer_class = ForecastSerializer
 
     def get_queryset(self):
-        queryset =  super().get_queryset()
+        queryset =  super().get_queryset().order_by('timestamp')
         dev_id = self.request.query_params.get('devId', None)
         date_range = self.request.query_params.get('date_range',None)        
        
