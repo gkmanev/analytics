@@ -21,11 +21,10 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 RUN pip install -U setuptools wheel
 
 
-RUN pip install torch==2.3.1 torchvision==0.18.1 --index-url https://download.pytorch.org/whl/cpu
+RUN pip install torch==1.13.1+cpu torchvision==0.14.1+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html --target=/kaggle/working/
 
-RUN pip install onnx==1.10.0
 
-RUN pip install autogluon
+RUN pip install autogluon --target=/kaggle/working/
 
 # Copy the current directory contents into the container at /app
 COPY . /app/
