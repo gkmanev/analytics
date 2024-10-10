@@ -20,11 +20,10 @@ RUN pip install --upgrade pip && pip install -r requirements.txt --no-use-pep517
 
 RUN pip install -U setuptools wheel
 
-RUN pip install -U uv
 
-RUN uv pip install torch==2.3.1 torchvision==0.18.1 --index-url https://download.pytorch.org/whl/cpu
+RUN pip install torch==2.3.1 torchvision==0.18.1 --index-url https://download.pytorch.org/whl/cpu
 
-RUN uv pip install autogluon
+RUN pip install autogluon
 
 # Copy the current directory contents into the container at /app
 COPY . /app/
