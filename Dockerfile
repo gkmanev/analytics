@@ -23,7 +23,7 @@ RUN pip install -U setuptools wheel
 
 RUN pip install --no-use-pep517 torch==2.3.1 torchvision==0.18.1 --index-url https://download.pytorch.org/whl/cpu
 
-RUN pip install --no-use-pep517 autogluon 
+RUN pip install --no-use-pep517 autogluon==0.83
 
 # Copy the current directory contents into the container at /app
 COPY . /app/
