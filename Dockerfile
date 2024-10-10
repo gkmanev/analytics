@@ -22,7 +22,7 @@ RUN pip install -U setuptools wheel
 
 RUN pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cpu
 
-RUN pip install autogluon.tabular 
+RUN pip install autogluon.timeseries
 
 # Copy the current directory contents into the container at /app
 COPY . /app/
