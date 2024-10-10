@@ -16,13 +16,13 @@ RUN apt-get update && apt-get install -y cmake build-essential protobuf-compiler
 COPY requirements.txt /app/
 
 # Install dependencies
-RUN pip install --upgrade pip && pip install --use-pep517 -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt --no-use-pep517
 
 RUN pip install -U setuptools wheel
 
 RUN pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cpu
 
-RUN pip install autogluon
+RUN pip install autogluon --no-use-pep517
 
 # Copy the current directory contents into the container at /app
 COPY . /app/
