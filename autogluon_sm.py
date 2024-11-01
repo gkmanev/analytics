@@ -1,8 +1,8 @@
 import requests
 import pandas as pd
 import json
-from autogluon.timeseries import TimeSeriesDataFrame, TimeSeriesPredictor
-from django.db import transaction
+#from autogluon.timeseries import TimeSeriesDataFrame, TimeSeriesPredictor
+#from django.db import transaction
 from mlapp.models import Forecast, Correlation, Feature
 import seaborn as sns
 import matplotlib.pyplot as plt

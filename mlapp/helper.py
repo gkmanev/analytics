@@ -82,7 +82,7 @@ class performML:
 
             merged_df = pd.merge(power_processed_df_trimmed, weather_processed_df_trimmed, on='timestamp', how='inner')            
         return merged_df
-    
+        
 
     def corelations(self):
         data = self.process_merge_df()
@@ -121,6 +121,7 @@ class performML:
     def time_series_forecast(self):
         
         data = self.process_merge_df()
+        print(f"Length: {len(data)}")
         if data is not None and not data.empty:
             train_data = TimeSeriesDataFrame.from_data_frame(
                 data,
