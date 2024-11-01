@@ -129,7 +129,7 @@ class performML:
                 timestamp_column="timestamp"
             )
             predictor = TimeSeriesPredictor(
-            prediction_length=700,
+            prediction_length=1200,
             path="/autogluon",  # Adjust path as needed
             target="value",
             eval_metric="MASE",
