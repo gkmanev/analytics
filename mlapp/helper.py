@@ -35,7 +35,7 @@ class performML:
     def prepare_power(self):
         response = requests.get(self.url).json()
         df1 = None
-        date_field_name = "created_date"
+        date_field_name = "created"
         if response:
             df1 = pd.DataFrame(response)
             
@@ -121,7 +121,7 @@ class performML:
     def time_series_forecast(self):
         
         data = self.process_merge_df()
-        print(f"Length: {len(data)}")
+        
         if data is not None and not data.empty:
             train_data = TimeSeriesDataFrame.from_data_frame(
                 data,
@@ -138,7 +138,7 @@ class performML:
             predictor.fit(
             train_data,
             presets="medium_quality",
-            time_limit=50,
+            time_limit=120,
             )
             predictions = predictor.predict(train_data)
 
