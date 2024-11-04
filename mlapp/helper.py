@@ -98,9 +98,7 @@ class performML:
             # print(correlation_matrix)        
             features = correlation_matrix.columns.tolist()
             # Create or get Feature objects
-            feature_objs = {name: Feature.objects.get_or_create(name=name)[0] for name in features}
-
-                               
+            feature_objs = {name: Feature.objects.get_or_create(name=name)[0] for name in features}                               
             
             # Iterate through the correlation matrix and save correlations
             for feature1 in features:
