@@ -35,7 +35,7 @@ class performML:
     def prepare_power(self):
         response = requests.get(self.url).json()
         df1 = None
-        date_field_name = "created"
+        date_field_name = "created_date"
         if response:
             df1 = pd.DataFrame(response)
             
