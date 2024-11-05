@@ -3,12 +3,12 @@ import os
 import json
 
 
-def today_correlation():
+def today_correlation_first_five():
     file_path = os.path.join('mlapp', 'coords.json')
     with open(file_path, 'r') as file:
         coords = json.load(file)
     
-    for dev in coords[7:10]:
+    for dev in coords[1:6]:
         for k,v in dev.items():
             devId = k 
             lat = v["lat"]
