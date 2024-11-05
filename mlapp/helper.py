@@ -136,7 +136,7 @@ class performML:
             predictor.fit(
             train_data,
             presets="medium_quality",
-            time_limit=120,
+            time_limit=240,
             )
             predictions = predictor.predict(train_data)
 
