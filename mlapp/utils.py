@@ -8,7 +8,7 @@ def today_correlation():
     with open(file_path, 'r') as file:
         coords = json.load(file)
     
-    for dev in coords[6:7]:
+    for dev in coords[7:10]:
         for k,v in dev.items():
             devId = k 
             lat = v["lat"]
