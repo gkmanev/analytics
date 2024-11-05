@@ -101,7 +101,11 @@ CELERY_RESULT_BACKEND = os.getenv("CELERY_BACKEND", "redis://redis:6379/0")
 CELERY_BEAT_SCHEDULE = {
     'todaty_correlation': {
         'task': 'mlapp.tasks.today_correlation_task',
-        'schedule': crontab(hour=16, minute=48),
+        'schedule': crontab(hour=1, minute=10),
+    },
+    'todaty_correlation_5_10': {
+        'task': 'mlapp.tasks.today_correlation_five_to_ten_task',
+        'schedule': crontab(hour=2, minute=0),
     },
 }
 
