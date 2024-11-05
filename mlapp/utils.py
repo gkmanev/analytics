@@ -14,8 +14,8 @@ def today_correlation():
             lat = v["lat"]
             long = v["long"]
             period = "month"
-            url_dev = f"http://85.14.6.37:16455/api/posts/?date_range=month&not_res=true&dev={devId}"
-            url_weather = f"http://85.14.6.37:16456/api/weather/?date_range=month&lat={lat}&long={long}"
+            url_dev = f"http://85.14.6.37:16455/api/posts/?date_range=year&not_res=true&dev={devId}"
+            url_weather = f"http://85.14.6.37:16456/api/weather/?date_range=year&lat={lat}&long={long}"
             calc_correlations = performML(url_dev, url_weather, period, devId)
             calc_correlations.corelations()
             make_forecast = performML(url_dev, url_weather, period, devId)
