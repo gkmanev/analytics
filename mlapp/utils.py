@@ -1,6 +1,10 @@
 from mlapp.helper import performML
+from mlapp.models import Forecast
+from datetime import datetime, timedelta
+from pytz import timezone
 import os
 import json
+import pandas as pd
 
 
 def today_correlation_first_five():
@@ -41,6 +45,44 @@ def today_correlation_five_ten():
             calc_correlations.corelations()
             make_forecast = performML(url_dev, url_weather, period, devId)
             make_forecast.time_series_forecast()
+
+
+
+def create_devs():
+    all_devs = list()
+    for i in range(30):
+        if i < 10:
+            all_devs.append(f"sm-000{i}")
+        else:
+            all_devs.append(f"sm-00{i}")
+    return all_devs
+
+
+def today_resample_data(resolution):
+    devs = create_devs()
+    today = datetime.now(timezone('Europe/Sofia')).date()
+    tomorrow = today + timedelta(1)
+    today_start = str(today)+'T'+'00:00:00Z'
+    today_end = str(tomorrow)+'T'+'00:00:00Z'
+    for dev in devs:
+        dataset = Forecast.objects.filter(devId=dev, timestamp__gte=today_start, timestamp_lte=today_end).order_by('timestamp')
+        data = list(dataset.values())
+        df = pd.DataFrame(list(data))
+
+        if 'created_date' not in df.columns:            
+            continue  # Skip this device if no 'created_date' found
+
+        df['created_date'] = pd.to_datetime(df['created_date'], utc=True)  # Ensuring it's in UTC
+        df.set_index('created_date', inplace=True)
+        # Resample to 15 minutes, summing the values in each interval
+        resampled_df = df.resample(resolution).mean(numeric_only=True) 
+        resampled_df = resampled_df.fillna(method='ffill')
+        resampled_df['devId'] = dev       
+        resampled_data = resampled_df.reset_index().to_dict(orient='records') 
+        return resampled_data      
+
+       
+
 
     
 
