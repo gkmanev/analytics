@@ -46,6 +46,7 @@ class Forecast(models.Model):
     power = models.FloatField()
     devId = models.CharField(max_length=50, default="devId")
     resample = ResamplingManager()
+    objects = models.Manager()
 
 
 class Feature(models.Model):
