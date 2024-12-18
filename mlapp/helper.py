@@ -142,7 +142,8 @@ class performML:
 
             for index, row in predictions.iterrows():            
                 timestamp = index[1]                
-                mean_value = round(row['mean'], 2)            
+                mean_value = round(row['mean'], 2)    
+                print(f"time: {timestamp} || prediction: {mean_value}")        
                 # Create Predictions object
                 
                 prediction_obj = Forecast(timestamp=timestamp, power=mean_value, devId = self.devId)
