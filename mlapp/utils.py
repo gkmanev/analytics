@@ -12,7 +12,7 @@ def today_correlation_first_five():
     with open(file_path, 'r') as file:
         coords = json.load(file)
     
-    for dev in coords[3:4]:
+    for dev in coords[1:6]:
         for k,v in dev.items():
             devId = k 
             lat = v["lat"]
