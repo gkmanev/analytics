@@ -178,24 +178,24 @@ class PVForecast:
             timestamp_column="timestamp"
         )
 
-        # model_path = "AutogluonModels/ag-20250207_104540/"  
-        # predictor = TimeSeriesPredictor.load(model_path)
+        model_path = "AutogluonModels/ag-20250207_142636/"  
+        predictor = TimeSeriesPredictor.load(model_path)
 
 
-        #Initialize the predictor
-        predictor = TimeSeriesPredictor(
-            target=target_column,    
-            prediction_length=192,
-            freq='15min',
-            known_covariates_names=known_covariates
-        )
+        ##Initialize the predictor
+        # predictor = TimeSeriesPredictor(
+        #     target=target_column,    
+        #     prediction_length=192,
+        #     freq='15min',
+        #     known_covariates_names=known_covariates
+        # )
 
-        #Fit the predictor with cross-validation
-        results = predictor.fit(
-            train_data=train_data,    
-            time_limit=600,  
-            presets="high_quality",
-        )
+        # #Fit the predictor with cross-validation
+        # results = predictor.fit(
+        #     train_data=train_data,    
+        #     time_limit=600,  
+        #     presets="high_quality",
+        # )
 
         predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
         
