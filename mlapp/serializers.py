@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Forecast, Feature, Correlation
+from .models import Forecast, Feature, Correlation, PVForecastModel
 
 
 class ForecastSerializer(serializers.ModelSerializer):
@@ -20,3 +20,8 @@ class CorrelationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Correlation
         fields = ['id', 'feature1', 'feature2', 'correlation_value', 'devId', 'period']
+
+class PVForecastModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PVForecastModel
+        fields = '__all__'

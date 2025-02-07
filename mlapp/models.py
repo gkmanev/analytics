@@ -68,3 +68,11 @@ class Correlation(models.Model):
 
     def __str__(self):
         return f'{self.feature1.name} - {self.feature2.name}: {self.correlation_value}'
+    
+    
+class PVForecastModel(models.Model):
+    timestamp = models.DateTimeField()
+    ppe = models.CharField(max_length=50)
+    farm = models.CharField(max_length=50)
+    production_forecast = models.FloatField()
+   

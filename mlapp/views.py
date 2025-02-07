@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Forecast, Feature, Correlation
-from .serializers import ForecastSerializer, FeatureSerializer, CorrelationSerializer
+from .models import Forecast, Feature, Correlation, PVForecastModel
+from .serializers import ForecastSerializer, FeatureSerializer, CorrelationSerializer, PVForecastModelSerializer
 from datetime import datetime
 from django.utils import timezone
 from rest_framework.response import Response
@@ -70,3 +70,8 @@ class CorrelationViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(devId=dev_id)
 
         return queryset
+
+class PVForecastModelViewSet(viewsets.ModelViewSet):
+    queryset = PVForecastModel.objects.all()
+    serializer_class = PVForecastModelSerializer
+    

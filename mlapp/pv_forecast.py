@@ -1,4 +1,5 @@
 from autogluon.timeseries import TimeSeriesPredictor, TimeSeriesDataFrame
+from mlapp.models import PVForecastModel
 import pandas as pd
 import requests
 import numpy as np
@@ -197,6 +198,12 @@ class PVForecast:
         )
 
         predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
-        print(predictions)
+        
+        for predict in predictions:
+            timestamp = predict["timestamp"]
+            prediction = predict["prediction"]
+            ppe = self.ppe
+            farm = 'Oborniki I'
+            PVForecastModel.objects.create(timestamp=timestamp, ppe=ppe, farm=farm, production_forecast=prediction)
 
 
