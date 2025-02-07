@@ -12,11 +12,6 @@ import plotly.graph_objects as go
 import plotly.io as pio
 import plotly.offline as pyo
 
-pio.renderers.default = "browser"  # Opens the figure in a browser window
-cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)
-retry_session = retry(cache_session, retries = 5, backoff_factor = 0.2)
-openmeteo = openmeteo_requests.Client(session = retry_session)
-
 
 class PVForecast:
     def __init__(self, end_date, ppe, start_date='2024-12-01', ):
@@ -55,6 +50,10 @@ class PVForecast:
 
 
     def fetch_weather_data(self, start, end, url_weather = "https://archive-api.open-meteo.com/v1/archive"):
+
+        cache_session = requests_cache.CachedSession('.cache', expire_after = 3600)
+        retry_session = retry(cache_session, retries = 5, backoff_factor = 0.2)
+        openmeteo = openmeteo_requests.Client(session = retry_session)
 
         df_dam = self.prepare_pv_data()
 
