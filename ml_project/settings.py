@@ -28,13 +28,14 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '85.14.6.37', '192.168.1.32']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '85.14.6.37', '192.168.1.32', '0.0.0.0']
 
 CORS_ORIGIN_ALLOW_ALL=True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://85.14.6.37",  # Include your server's IP here
+    "http://0.0.0.0:8000"
 ]
 
 
