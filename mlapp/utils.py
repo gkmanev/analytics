@@ -5,7 +5,7 @@ from pytz import timezone
 import os
 import json
 import pandas as pd
-
+from pv_forecast import test
 
 def today_correlation_first_five():
     file_path = os.path.join('mlapp', 'coords.json')
@@ -84,9 +84,9 @@ def today_resample_data(resolution):
        
 
 
-    
-
-
+def pv_forecast():
+    test()
+    return "Forecast created successfully!" 
 
 
 

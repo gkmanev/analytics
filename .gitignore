@@ -1,6 +1,10 @@
 # Ignore virtual environment
 django_pandas_venv/
 
+AutogluonModels/
+
+gluon_venv/
+
 # Python bytecode files
 __pycache__/
 *.py[cod]
