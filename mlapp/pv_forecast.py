@@ -193,7 +193,7 @@ class PVForecast:
         #Fit the predictor with cross-validation
         results = predictor.fit(
             train_data=train_data,    
-            time_limit=1200,  
+            time_limit=600,  
             presets="high_quality",
         )
 

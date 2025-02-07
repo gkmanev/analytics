@@ -92,7 +92,7 @@ CORS_ORIGIN_ALLOW_ALL=True
 # Celery Configuration Options
 CELERY_TIMEZONE = "Europe/Sofia"
 CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_TASK_TIME_LIMIT = 45 * 60
 
 # Celery Configuration
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER", "redis://redis:6379/0")
@@ -102,7 +102,7 @@ CELERY_RESULT_BACKEND = os.getenv("CELERY_BACKEND", "redis://redis:6379/0")
 CELERY_BEAT_SCHEDULE = {
     'todaty_correlation': {
         'task': 'mlapp.tasks.today_correlation_task',
-        'schedule': crontab(hour=23, minute=45),
+        'schedule': crontab(hour=23, minute=59),
     },
     'todaty_correlation_5_10': {
         'task': 'mlapp.tasks.today_correlation_five_to_ten_task',
