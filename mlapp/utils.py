@@ -6,6 +6,7 @@ import os
 import json
 import pandas as pd
 from mlapp.pv_forecast import PVForecast
+from django.conf import settings
 
 def today_correlation_first_five():
     file_path = os.path.join('mlapp', 'coords.json')
@@ -82,15 +83,32 @@ def today_resample_data(resolution):
         return resampled_data      
 
        
-
-
 def pv_ml_forecast():
+    project_mapping_path = os.path.join(settings.BASE_DIR, 'projects_mapping.json')
+    project_mapping = []
+    try:
+        if os.path.exists(project_mapping_path):
+            with open(project_mapping_path, 'r') as f:
+                project_mapping = json.load(f)
+        else:
+            print(f"Project mapping file not found: {project_mapping_path}")
+    except Exception as e:
+        print(f"Error loading project mapping file: {e}")
 
     today = datetime.now().date() - timedelta(days=1)
     end_date = today.strftime('%Y-%m-%d')
-    ppe = '590310600030911897'
-    forecast = PVForecast(end_date, ppe)
-    forecast.train_model()
+    
+    for it in project_mapping:
+        ppe = it.get("PPE", None)
+        farm = it.get("farm", None)
+        if ppe is not None:                                    
+            forecast = PVForecast(end_date, ppe=ppe, farm=farm)
+            forecast.train_model()
+    
+
+
+
+    
     
 
 
