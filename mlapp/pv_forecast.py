@@ -138,7 +138,7 @@ class PVForecast:
     def prepare_covariates(self):
 
         start_date_val = self.end_date
-        end_date_val = datetime.strptime(self.end_date, '%Y-%m-%d') + timedelta(days=2)
+        end_date_val = datetime.strptime(self.end_date, '%Y-%m-%d') + timedelta(days=3)
         end_date_val = end_date_val.strftime('%Y-%m-%d') 
 
         forecast_df = self.fetch_weather_data(start_date_val, end_date_val, url_weather = "https://api.open-meteo.com/v1/forecast")
@@ -148,7 +148,7 @@ class PVForecast:
 
         forecast_df["item_id"] = "series_1"
 
-        forecast_df = forecast_df.iloc[:192]
+        forecast_df = forecast_df.iloc[:288]
 
         future_covariates = TimeSeriesDataFrame.from_data_frame(
             forecast_df,
@@ -186,7 +186,7 @@ class PVForecast:
         #Initialize the predictor
         predictor = TimeSeriesPredictor(
             target=target_column,    
-            prediction_length=192,
+            prediction_length=288,
             freq='15min',
             known_covariates_names=known_covariates
         )
@@ -209,7 +209,14 @@ class PVForecast:
             timestamp = predict["timestamp"]
             prediction = predict["mean"]
             ppe = self.ppe
-            farm = 'Oborniki I'
-            PVForecastModel.objects.create(timestamp=timestamp, ppe=ppe, farm=farm, production_forecast=prediction)
-
+            farm = 'Oborniki I'            
+            # Check if the datapoint exists
+            obj, created = PVForecastModel.objects.update_or_create(
+            timestamp=timestamp,
+            ppe=ppe,
+            defaults={
+                'farm': farm,
+                'production_forecast': prediction
+            }
+            )
 
