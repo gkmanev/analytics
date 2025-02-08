@@ -155,6 +155,7 @@ class PVForecast:
             id_column="item_id",
             timestamp_column="timestamp"
         )        
+        print(len(future_covariates))
 
         return future_covariates
 
@@ -194,16 +195,19 @@ class PVForecast:
         results = predictor.fit(
             train_data=train_data,    
             time_limit=600,  
-            presets="high_quality",
-            hyperparameters={'TFT': {'max_memory_ratio': 0.5}}  # Reduce memory usage
+            presets="fast_training",           
 
         )
 
         predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
-        
+        predictions.reset_index(inplace=True)
+        predictions = predictions[['timestamp', 'mean']]
+        predictions = predictions.to_dict(orient='records')
+        print(predictions)
+
         for predict in predictions:
             timestamp = predict["timestamp"]
-            prediction = predict["prediction"]
+            prediction = predict["mean"]
             ppe = self.ppe
             farm = 'Oborniki I'
             PVForecastModel.objects.create(timestamp=timestamp, ppe=ppe, farm=farm, production_forecast=prediction)
