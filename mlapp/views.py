@@ -72,6 +72,15 @@ class CorrelationViewSet(viewsets.ModelViewSet):
         return queryset
 
 class PVForecastModelViewSet(viewsets.ModelViewSet):
-    queryset = PVForecastModel.objects.all()
+    queryset = PVForecastModel.objects.all().order_by('timestamp')
     serializer_class = PVForecastModelSerializer
     
+    def get_queryset(self):
+        farm = self.request.query_params.get('farm', None)
+        ppe = self.request.query_params.get('ppe', None)
+        queryset = super().get_queryset()
+        if farm:
+            queryset = queryset.filter(farm=farm)
+        if ppe:
+            queryset = queryset.filter(ppe=ppe)
+        return queryset
