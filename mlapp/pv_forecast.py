@@ -200,22 +200,27 @@ class PVForecast:
                     time_limit=600,  
                     presets="fast_training",
                 )
+                if len(future_covariates) < 288:
+                    raise ValueError(f"Not enough future covariates! Expected 288, but got {len(future_covariates)}")
+                else:
+                    #print first and last item of the future covariates and their timestamps
+                    print(future_covariates.head(1))
+                    print(future_covariates.tail(1))
+                    predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
+                    predictions.reset_index(inplace=True)
+                    predictions = predictions[['timestamp', 'mean']]
+                    predictions = predictions.to_dict(orient='records')               
 
-                predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
-                predictions.reset_index(inplace=True)
-                predictions = predictions[['timestamp', 'mean']]
-                predictions = predictions.to_dict(orient='records')               
-
-                for predict in predictions:
-                    timestamp = predict["timestamp"]
-                    prediction = predict["mean"]                      
-                    # Check if the datapoint exists
-                    obj, created = PVForecastModel.objects.update_or_create(
-                    timestamp=timestamp,
-                    ppe=self.ppe,
-                    defaults={
-                        'farm': self.farm,
-                        'production_forecast': prediction
-                    }
-                    )
+                    for predict in predictions:
+                        timestamp = predict["timestamp"]
+                        prediction = predict["mean"]                      
+                        # Check if the datapoint exists
+                        obj, created = PVForecastModel.objects.update_or_create(
+                        timestamp=timestamp,
+                        ppe=self.ppe,
+                        defaults={
+                            'farm': self.farm,
+                            'production_forecast': prediction
+                        }
+                        )
 
