@@ -167,6 +167,8 @@ class PVForecast:
 
         future_covariates = self.prepare_covariates()
 
+        print(f"project: {self.ppe}, farm: {self.farm}")
+        print(f"-------------------------------------------------------------")
         combined_weather_and_df_dam["item_id"] = "series_1"
 
         target_column = 'production'  
@@ -176,7 +178,7 @@ class PVForecast:
 
         if len(combined_weather_and_df_dam) > 0:
             if len(future_covariates) == 288:
-       
+                
                 train_data = TimeSeriesDataFrame.from_data_frame(
                     combined_weather_and_df_dam,
                     id_column="item_id",
@@ -200,8 +202,9 @@ class PVForecast:
                     time_limit=600,  
                     presets="fast_training",
                 )
-                if len(future_covariates) < 288:
-                    raise ValueError(f"Not enough future covariates! Expected 288, but got {len(future_covariates)}")
+                if len(future_covariates) < 288:                    raise ValueError(f"Not enough future covariates! Expected 288, but got {len(future_covariates)}")
+                    
+                
                 else:
                     #print first and last item of the future covariates and their timestamps
                     print(future_covariates.head(1))
@@ -223,4 +226,5 @@ class PVForecast:
                             'production_forecast': prediction
                         }
                         )
+                    return predictions
 
