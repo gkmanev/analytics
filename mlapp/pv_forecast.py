@@ -48,6 +48,9 @@ class PVForecast:
 
         # drop all the columns instead of timestamp and production
         df_dam = df_dam[['timestamp', 'production', 'latitude', 'longitude']]
+        if df_dam.isnull().values.any():
+            print("Warning: NaNs detected in the DataFrame. Please fill or drop them.")
+            return None
         return df_dam
 
 
@@ -118,6 +121,8 @@ class PVForecast:
     def prepare_merged_df(self):       
 
         df_dam = self.prepare_pv_data()
+        if df_dam is None:
+            return None
 
         resampled_df = self.fetch_weather_data(self.start_date, self.end_date)
 
@@ -164,6 +169,8 @@ class PVForecast:
     def train_model(self):
         # Prepare data for the Autogluon
         combined_weather_and_df_dam = self.prepare_merged_df()
+        if combined_weather_and_df_dam is None:
+            return None
 
         future_covariates = self.prepare_covariates()
 
@@ -201,30 +208,24 @@ class PVForecast:
                     train_data=train_data,    
                     time_limit=600,  
                     presets="fast_training",
-                )
-                if len(future_covariates) < 288:                    raise ValueError(f"Not enough future covariates! Expected 288, but got {len(future_covariates)}")
-                    
-                
-                else:
-                    #print first and last item of the future covariates and their timestamps
-                    print(future_covariates.head(1))
-                    print(future_covariates.tail(1))
-                    predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
-                    predictions.reset_index(inplace=True)
-                    predictions = predictions[['timestamp', 'mean']]
-                    predictions = predictions.to_dict(orient='records')               
+                )                             
+  
+                predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
+                predictions.reset_index(inplace=True)
+                predictions = predictions[['timestamp', 'mean']]
+                predictions = predictions.to_dict(orient='records')               
 
-                    for predict in predictions:
-                        timestamp = predict["timestamp"]
-                        prediction = predict["mean"]                      
-                        # Check if the datapoint exists
-                        obj, created = PVForecastModel.objects.update_or_create(
-                        timestamp=timestamp,
-                        ppe=self.ppe,
-                        defaults={
-                            'farm': self.farm,
-                            'production_forecast': prediction
-                        }
-                        )
-                    return predictions
+                for predict in predictions:
+                    timestamp = predict["timestamp"]
+                    prediction = predict["mean"]                      
+                    # Check if the datapoint exists
+                    obj, created = PVForecastModel.objects.update_or_create(
+                    timestamp=timestamp,
+                    ppe=self.ppe,
+                    defaults={
+                        'farm': self.farm,
+                        'production_forecast': prediction
+                    }
+                    )
+            
 
