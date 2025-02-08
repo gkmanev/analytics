@@ -173,49 +173,49 @@ class PVForecast:
 
         known_covariates = ["temperature_2m", "cloud_cover", "cloud_cover_low", "wind_speed_10m", "direct_radiation", "diffuse_radiation", "global_tilted_irradiance"]
 
-        #Convert DataFrame to TimeSeriesDataFrame
-        train_data = TimeSeriesDataFrame.from_data_frame(
-            combined_weather_and_df_dam,
-            id_column="item_id",
-            timestamp_column="timestamp"
-        )
 
-        # model_path = "AutogluonModels/ag-20250207_142636/"  
-        # predictor = TimeSeriesPredictor.load(model_path)
+        if len(combined_weather_and_df_dam) > 0:
+            if len(future_covariates) == 288:
+       
+                train_data = TimeSeriesDataFrame.from_data_frame(
+                    combined_weather_and_df_dam,
+                    id_column="item_id",
+                    timestamp_column="timestamp"
+                )
 
+                # model_path = "AutogluonModels/ag-20250207_142636/"  
+                # predictor = TimeSeriesPredictor.load(model_path)
 
-        #Initialize the predictor
-        predictor = TimeSeriesPredictor(
-            target=target_column,    
-            prediction_length=288,
-            freq='15min',
-            known_covariates_names=known_covariates
-        )
+                #Initialize the predictor
+                predictor = TimeSeriesPredictor(
+                    target=target_column,    
+                    prediction_length=288,
+                    freq='15min',
+                    known_covariates_names=known_covariates
+                )
 
-        #Fit the predictor with cross-validation
-        results = predictor.fit(
-            train_data=train_data,    
-            time_limit=600,  
-            presets="fast_training",           
+                #Fit the predictor with cross-validation
+                results = predictor.fit(
+                    train_data=train_data,    
+                    time_limit=600,  
+                    presets="fast_training",
+                )
 
-        )
+                predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
+                predictions.reset_index(inplace=True)
+                predictions = predictions[['timestamp', 'mean']]
+                predictions = predictions.to_dict(orient='records')               
 
-        predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
-        predictions.reset_index(inplace=True)
-        predictions = predictions[['timestamp', 'mean']]
-        predictions = predictions.to_dict(orient='records')
-        print(predictions)
-
-        for predict in predictions:
-            timestamp = predict["timestamp"]
-            prediction = predict["mean"]                      
-            # Check if the datapoint exists
-            obj, created = PVForecastModel.objects.update_or_create(
-            timestamp=timestamp,
-            ppe=self.ppe,
-            defaults={
-                'farm': self.farm,
-                'production_forecast': prediction
-            }
-            )
+                for predict in predictions:
+                    timestamp = predict["timestamp"]
+                    prediction = predict["mean"]                      
+                    # Check if the datapoint exists
+                    obj, created = PVForecastModel.objects.update_or_create(
+                    timestamp=timestamp,
+                    ppe=self.ppe,
+                    defaults={
+                        'farm': self.farm,
+                        'production_forecast': prediction
+                    }
+                    )
 
