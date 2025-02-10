@@ -212,7 +212,7 @@ class PVForecast:
   
                 predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
                 predictions.reset_index(inplace=True)
-                predictions = predictions[['timestamp', 'mean']]
+                predictions = predictions[['timestamp', '0.9']]
                 predictions = predictions.to_dict(orient='records')               
 
                 for predict in predictions:
