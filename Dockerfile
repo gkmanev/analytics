@@ -24,7 +24,7 @@ RUN pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.py
 
 RUN pip install autogluon.timeseries
 
-FROM nvidia/cuda:12.2.2-runtime-ubuntu22.04
+FROM nvidia/cuda:11.6.2-base-ubuntu20.04
 
 # Copy the current directory contents into the container at /app
 COPY . /app/
