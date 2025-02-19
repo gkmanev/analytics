@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
 
   web:
@@ -13,14 +15,21 @@ services:
       - POSTGRES_PASSWORD=postgres
       - DEBUG=1
       - SECRET_KEY=foo
-      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1, 192.168.1.32, 85.14.6.37, [::1]
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,192.168.1.32,85.14.6.37,[::1]
     depends_on:
       - redis
       - db
     volumes:
       - .:/code
     restart: always
-
+    runtime: nvidia  # Ensure GPU runtime is used
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
   db:
     image: postgres:16
@@ -46,13 +55,20 @@ services:
       - POSTGRES_PASSWORD=postgres
       - DEBUG=1
       - SECRET_KEY=foo
-      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,85.14.6.37, 192.168.1.32 [::1]
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,85.14.6.37,192.168.1.32,[::1]
     depends_on:
       - redis
       - web
       - db
     restart: always
-
+    runtime: nvidia  # Ensure GPU runtime is used
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
   celery_beat:
     build:
@@ -64,10 +80,18 @@ services:
       - POSTGRES_PASSWORD=postgres
       - DEBUG=1
       - SECRET_KEY=foo
-      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,85.14.6.37, 192.168.1.32 [::1]
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,85.14.6.37,192.168.1.32,[::1]
     depends_on:
       - redis
     restart: always
+    runtime: nvidia  # Ensure GPU runtime is used
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
 
 volumes:
   postgres_data_new:
