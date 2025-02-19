@@ -4,7 +4,7 @@ FROM nvidia/cuda:11.6.2-base-ubuntu20.04
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV DEBIAN_FRONTEND=noninteractive  
+ENV DEBIAN_FRONTEND=noninteractive 
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -19,8 +19,8 @@ RUN apt-get update && apt-get install -y \
     dpkg-reconfigure -f noninteractive tzdata
 
 # Ensure python3 is the default
-RUN ln -s /usr/bin/python3 /usr/bin/python \
-    && ln -s /usr/bin/pip3 /usr/bin/pip
+RUN ln -sf /usr/bin/python3 /usr/bin/python \
+    && ln -sf /usr/bin/pip3 /usr/bin/pip  # Use -sf to force overwrite
 
 # Set working directory
 WORKDIR /app
