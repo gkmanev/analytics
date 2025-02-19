@@ -207,8 +207,7 @@ class PVForecast:
                 results = predictor.fit(
                     train_data=train_data,    
                     time_limit=1200,  
-                    presets="high_quality"
-                   
+                    presets="high_quality"                   
                 )                             
   
                 predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
