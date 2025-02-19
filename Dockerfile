@@ -4,9 +4,16 @@ FROM nvidia/cuda:11.6.2-base-ubuntu20.04
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV DEBIAN_FRONTEND=noninteractive  
 
 # Install dependencies
-RUN apt-get update && apt-get install -y cmake build-essential protobuf-compiler python3 python3-pip
+RUN apt-get update && apt-get install -y \
+    cmake \
+    build-essential \
+    protobuf-compiler \
+    tzdata && \
+    ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
 
 # Set Python 3 as default
 RUN ln -s /usr/bin/python3 /usr/bin/python
