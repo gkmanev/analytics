@@ -217,6 +217,7 @@ class PVForecast:
 
                 for predict in predictions:
                     timestamp = predict["timestamp"]
+                    print(f"timestamp: {timestamp}")
                     prediction = predict["0.9"]                      
                     # Check if the datapoint exists
                     obj, created = PVForecastModel.objects.update_or_create(
