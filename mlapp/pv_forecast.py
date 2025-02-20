@@ -209,16 +209,16 @@ class PVForecast:
                 results = predictor.fit(
                     train_data=train_data,    
                     hyperparameters={
-                        "DeepAR": {
-                            # You can specify DeepAR-specific hyperparameters here
-                            # For example:
-                            "context_length": 576,
-                            "num_layers": 3,
-                            "hidden_size": 128,
-                            "dropout_rate": 0.1,
-                            "learning_rate": 1e-3
-                        }
-                    },     
+                            "TiDE": {
+                                # TiDE-specific hyperparameters
+                                "context_length": 576,
+                                "hidden_size": 128,
+                                "num_encoder_layers": 3,
+                                "num_decoder_layers": 3,
+                                "dropout_rate": 0.1,
+                                "learning_rate": 1e-3
+                            }
+                        },      
                     time_limit=1200      
                 )                             
   
@@ -242,6 +242,8 @@ class PVForecast:
                     )
                 best_model_name = predictor.model_best
                 print(f"The best model is: {best_model_name}")
+                feature_importance = predictor.feature_importance(data=train_data)
+                print(f"Feature importance: {feature_importance}")
 
             
 
