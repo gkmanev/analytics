@@ -209,28 +209,28 @@ class PVForecast:
                 results = predictor.fit(
                     train_data=train_data,    
                     hyperparameters={
-                            "TiDE": {
-                                # TiDE-specific hyperparameters
-                                "context_length": 576,
-                                "hidden_size": 128,
-                                "num_encoder_layers": 3,
-                                "num_decoder_layers": 3,
-                                "dropout_rate": 0.1,
-                                "learning_rate": 1e-3
-                            }
-                        },      
+                        "DeepAR": {
+                            # You can specify DeepAR-specific hyperparameters here
+                            # For example:
+                            "context_length": 576,
+                            "num_layers": 3,
+                            "hidden_size": 128,
+                            "dropout_rate": 0.1,
+                            "learning_rate": 1e-3
+                        }
+                    },     
                     time_limit=1200      
                 )                             
   
                 predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
                 predictions.reset_index(inplace=True)
-                predictions = predictions[['timestamp', 'mean']]
+                predictions = predictions[['timestamp', '0.9']]
                 predictions = predictions.to_dict(orient='records')               
 
                 for predict in predictions:
                     timestamp = predict["timestamp"]
-                    print(f"timestamp: {timestamp}")
-                    prediction = predict["mean"]                      
+                    
+                    prediction = predict["0.9"]                      
                     # Check if the datapoint exists
                     obj, created = PVForecastModel.objects.update_or_create(
                     timestamp=timestamp,
@@ -241,7 +241,7 @@ class PVForecast:
                     }
                     )
                 best_model_name = predictor.model_best
-                print(f"The best model is: {best_model_name}")
+                #print(f"The best model is: {best_model_name}")
                 feature_importance = predictor.feature_importance(data=train_data)
                 print(f"Feature importance: {feature_importance}")
 

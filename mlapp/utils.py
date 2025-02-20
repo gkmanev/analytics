@@ -95,13 +95,13 @@ def pv_ml_forecast():
     except Exception as e:
         print(f"Error loading project mapping file: {e}")
 
-    today = datetime.now().date() - timedelta(days=9)
+    today = datetime.now().date() - timedelta(days=1)
     end_date = today.strftime('%Y-%m-%d')
     
     for it in project_mapping:
         ppe = it.get("PPE", None)
         farm = it.get("farm", None)
-        if ppe is not None and ppe == "590310600030911897":                                    
+        if ppe is not None: # and ppe == "590310600030911897":                                    
             forecast = PVForecast(end_date, ppe=ppe, farm=farm)
             forecast.train_model()
     
