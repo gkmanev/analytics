@@ -224,13 +224,13 @@ class PVForecast:
   
                 predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
                 predictions.reset_index(inplace=True)
-                predictions = predictions[['timestamp', '0.9']]
+                predictions = predictions[['timestamp', 'mean']]
                 predictions = predictions.to_dict(orient='records')               
 
                 for predict in predictions:
                     timestamp = predict["timestamp"]
                     print(f"timestamp: {timestamp}")
-                    prediction = predict["0.9"]                      
+                    prediction = predict["mean"]                      
                     # Check if the datapoint exists
                     obj, created = PVForecastModel.objects.update_or_create(
                     timestamp=timestamp,
