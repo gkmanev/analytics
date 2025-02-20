@@ -208,8 +208,18 @@ class PVForecast:
                 #Fit the predictor with cross-validation
                 results = predictor.fit(
                     train_data=train_data,    
-                    time_limit=1200,  
-                    presets="high_quality"                   
+                    hyperparameters={
+                        "DeepAR": {
+                            # You can specify DeepAR-specific hyperparameters here
+                            # For example:
+                            "context_length": 576,
+                            "num_layers": 3,
+                            "hidden_size": 128,
+                            "dropout_rate": 0.1,
+                            "learning_rate": 1e-3
+                        }
+                    },     
+                    time_limit=1200      
                 )                             
   
                 predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
