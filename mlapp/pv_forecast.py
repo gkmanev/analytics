@@ -71,7 +71,7 @@ class PVForecast:
             "longitude": long,
             "start_date":start,	
             "end_date": end,
-            "hourly": ["temperature_2m", "cloud_cover", "cloud_cover_low", "wind_speed_10m", "direct_radiation", "diffuse_radiation", "global_tilted_irradiance"],
+            "hourly": ["temperature_2m", "cloud_cover", "cloud_cover_low", "wind_speed_10m", "direct_radiation", "diffuse_radiation", "global_tilted_irradiance", "is_day"],
             "tilt": 30
         }
         responses = openmeteo.weather_api(url_weather, params=params)
@@ -86,6 +86,7 @@ class PVForecast:
         hourly_direct_radiation = hourly.Variables(4).ValuesAsNumpy()
         hourly_diffuse_radiation = hourly.Variables(5).ValuesAsNumpy()
         hourly_global_tilted_irradiance = hourly.Variables(6).ValuesAsNumpy()
+        hourly_is_day = hourly.Variables(7).ValuesAsNumpy()
 
         hourly_data = {"date": pd.date_range(
             start = pd.to_datetime(hourly.Time(), unit = "s", utc = True),
@@ -101,6 +102,7 @@ class PVForecast:
         hourly_data["direct_radiation"] = hourly_direct_radiation
         hourly_data["diffuse_radiation"] = hourly_diffuse_radiation
         hourly_data["global_tilted_irradiance"] = hourly_global_tilted_irradiance
+        hourly_data["is_day"] = hourly_is_day
 
         hourly_dataframe = pd.DataFrame(data = hourly_data)
 
@@ -180,7 +182,7 @@ class PVForecast:
 
         target_column = 'production'  
 
-        known_covariates = ["temperature_2m", "cloud_cover", "cloud_cover_low", "wind_speed_10m", "direct_radiation", "diffuse_radiation", "global_tilted_irradiance"]
+        known_covariates = ["temperature_2m", "cloud_cover", "cloud_cover_low", "wind_speed_10m", "direct_radiation", "diffuse_radiation", "global_tilted_irradiance", "is_day"]
 
 
         if len(combined_weather_and_df_dam) > 0:
