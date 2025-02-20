@@ -228,5 +228,8 @@ class PVForecast:
                         'production_forecast': prediction
                     }
                     )
+                best_model_name = predictor.model_best
+                print(f"The best model is: {best_model_name}")
+
             
 
