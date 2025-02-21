@@ -101,7 +101,7 @@ def pv_ml_forecast():
     for it in project_mapping:
         ppe = it.get("PPE", None)
         farm = it.get("farm", None)
-        if ppe is not None: # and ppe == "590310600030911897":                                    
+        if ppe is not None and ppe == "590310600030911897":                                    
             forecast = PVForecast(end_date, ppe=ppe, farm=farm)
             forecast.train_model()
     

@@ -15,7 +15,7 @@ import plotly.offline as pyo
 
 
 class PVForecast:
-    def __init__(self, end_date, ppe, farm, start_date='2024-12-01', ):
+    def __init__(self, end_date, ppe, farm, start_date='2023-12-01'):
         self.start_date = start_date
         self.end_date = end_date
         self.farm = farm
@@ -71,7 +71,7 @@ class PVForecast:
             "longitude": long,
             "start_date":start,	
             "end_date": end,
-            "hourly": ["temperature_2m", "cloud_cover", "cloud_cover_low", "wind_speed_10m", "direct_radiation", "diffuse_radiation", "global_tilted_irradiance", "is_day"],
+            "hourly": ["temperature_2m", "cloud_cover", "cloud_cover_low", "wind_speed_10m", "direct_radiation", "diffuse_radiation", "global_tilted_irradiance"],
             "tilt": 30
         }
         responses = openmeteo.weather_api(url_weather, params=params)
@@ -146,7 +146,7 @@ class PVForecast:
     def prepare_covariates(self):
 
         start_date_val = self.end_date
-        end_date_val = datetime.strptime(self.end_date, '%Y-%m-%d') + timedelta(days=3)
+        end_date_val = datetime.strptime(self.end_date, '%Y-%m-%d') + timedelta(days=5)
         end_date_val = end_date_val.strftime('%Y-%m-%d') 
 
         forecast_df = self.fetch_weather_data(start_date_val, end_date_val, url_weather = "https://api.open-meteo.com/v1/forecast")
@@ -156,7 +156,7 @@ class PVForecast:
 
         forecast_df["item_id"] = "series_1"
 
-        forecast_df = forecast_df.iloc[:288]
+        forecast_df = forecast_df.iloc[:480]
 
         future_covariates = TimeSeriesDataFrame.from_data_frame(
             forecast_df,
@@ -175,18 +175,19 @@ class PVForecast:
             return None
 
         future_covariates = self.prepare_covariates()
-
         print(f"project: {self.ppe}, farm: {self.farm}")
         print(f"-------------------------------------------------------------")
         combined_weather_and_df_dam["item_id"] = "series_1"
 
         target_column = 'production'  
 
-        known_covariates = ["temperature_2m", "cloud_cover", "cloud_cover_low", "wind_speed_10m", "direct_radiation", "diffuse_radiation", "global_tilted_irradiance", "is_day"]
+        known_covariates = ["temperature_2m", "cloud_cover", "cloud_cover_low", "wind_speed_10m", "direct_radiation", "diffuse_radiation", "global_tilted_irradiance"]
 
-
+        if combined_weather_and_df_dam is None:
+            print("Error: The DataFrame is empty. Please check the data.")
+            return None
         if len(combined_weather_and_df_dam) > 0:
-            if len(future_covariates) == 288:
+            if len(future_covariates) == 480:
                 
                 train_data = TimeSeriesDataFrame.from_data_frame(
                     combined_weather_and_df_dam,
@@ -200,7 +201,7 @@ class PVForecast:
                 #Initialize the predictor
                 predictor = TimeSeriesPredictor(
                     target=target_column,    
-                    prediction_length=288,
+                    prediction_length=480,
                     freq='15min',
                     known_covariates_names=known_covariates
                 )
@@ -214,7 +215,7 @@ class PVForecast:
                             # For example:
                             "context_length": 576,
                             "num_layers": 3,
-                            "hidden_size": 128,
+                            "hidden_size": 480,
                             "dropout_rate": 0.1,
                             "learning_rate": 1e-3
                         }
