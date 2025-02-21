@@ -15,7 +15,7 @@ import plotly.offline as pyo
 
 
 class PVForecast:
-    def __init__(self, end_date, ppe, farm, start_date='2023-12-01'):
+    def __init__(self, end_date, ppe, farm, start_date='2024-12-01'):
         self.start_date = start_date
         self.end_date = end_date
         self.farm = farm
