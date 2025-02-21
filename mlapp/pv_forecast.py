@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import plotly.io as pio
 import plotly.offline as pyo
+import json
 
 
 class PVForecast:
@@ -187,8 +188,7 @@ class PVForecast:
             print("Error: The DataFrame is empty. Please check the data.")
             return None
         if len(combined_weather_and_df_dam) > 0:
-            if len(future_covariates) == 480:
-                
+            if len(future_covariates) == 480:                
                 train_data = TimeSeriesDataFrame.from_data_frame(
                     combined_weather_and_df_dam,
                     id_column="item_id",
@@ -231,7 +231,10 @@ class PVForecast:
                 for predict in predictions:
                     timestamp = predict["timestamp"]
                     
-                    prediction = predict["0.9"]                      
+                    prediction = predict["0.9"]    
+                    # check if prediction < 5
+                    if prediction < 5:
+                        prediction = 0                                     
                     # Check if the datapoint exists
                     obj, created = PVForecastModel.objects.update_or_create(
                     timestamp=timestamp,
@@ -241,10 +244,23 @@ class PVForecast:
                         'production_forecast': prediction
                     }
                     )
-                best_model_name = predictor.model_best
+                #best_model_name = predictor.model_best
                 #print(f"The best model is: {best_model_name}")
                 feature_importance = predictor.feature_importance(data=train_data)
                 print(f"Feature importance: {feature_importance}")
+                model_info = predictor.info()
+                path_data = model_info.get('path', None)
+                folder_name = 'AutoglounModels'
+                split = path_data.split('AutogluonModels\\')
+                if len(split) > 1:
+                    model_path = f"{folder_name}/{split[1]}"
+                    # record the model path into models_path_data.json
+                    models_path_data = {}   
+                    models_path_data['model_path'] = model_path
+                    models_path_data['ppe'] = self.ppe
+                    with open('models_path_data.json', 'a') as f:
+                        json.dump(models_path_data, f)
+                        f.write('\n')
 
             
 

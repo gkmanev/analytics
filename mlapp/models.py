@@ -36,10 +36,6 @@ class ResamplingManager(models.Manager):
         return resampled_data
              
 
-            
-
-
-
 
 class Forecast(models.Model):
     timestamp = models.DateTimeField(default = datetime.now(timezone('Europe/London')).date())
@@ -54,6 +50,7 @@ class Feature(models.Model):
 
     def __str__(self):
         return self.name
+    
 
 class Correlation(models.Model):
     feature1 = models.ForeignKey(Feature, on_delete=models.CASCADE, related_name='feature1')

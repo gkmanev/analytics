@@ -1,6 +1,6 @@
 # weather_data/tasks.py
 from celery import shared_task
-from mlapp.utils import today_correlation_first_five, today_correlation_five_ten, today_resample_data, pv_ml_forecast
+from mlapp.utils import today_correlation_first_five, today_correlation_five_ten, today_resample_data, pv_forecast_first_five, pv_forecast_five_ten
 import logging
 
 logger = logging.getLogger(__name__)
@@ -25,6 +25,12 @@ def resample_forecast_task(resample):
 
 
 @shared_task
-def pv_forecast_task():
-    pv_ml_forecast()
-    logger.info("RUN PV FORECAST")
+def pv_forecast_first_five_task():
+    pv_forecast_first_five()
+    logger.info("RUN PV FORECAST_1-5")
+
+@shared_task
+def pv_forecast_five_ten_task():
+    pv_forecast_five_ten()
+    logger.info("RUN PV FORECAST_5-10")
+    
