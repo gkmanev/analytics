@@ -86,7 +86,7 @@ class PVForecast:
         hourly_direct_radiation = hourly.Variables(4).ValuesAsNumpy()
         hourly_diffuse_radiation = hourly.Variables(5).ValuesAsNumpy()
         hourly_global_tilted_irradiance = hourly.Variables(6).ValuesAsNumpy()
-        hourly_is_day = hourly.Variables(7).ValuesAsNumpy()
+        
 
         hourly_data = {"date": pd.date_range(
             start = pd.to_datetime(hourly.Time(), unit = "s", utc = True),
@@ -102,7 +102,7 @@ class PVForecast:
         hourly_data["direct_radiation"] = hourly_direct_radiation
         hourly_data["diffuse_radiation"] = hourly_diffuse_radiation
         hourly_data["global_tilted_irradiance"] = hourly_global_tilted_irradiance
-        hourly_data["is_day"] = hourly_is_day
+        
 
         hourly_dataframe = pd.DataFrame(data = hourly_data)
 
