@@ -249,19 +249,19 @@ class PVForecast:
                 #feature_importance = predictor.feature_importance(data=train_data)                
                 model_info = predictor.info()
                 print(f"Model info: {model_info}")
-                path_data = model_info.get('path', None)
-                folder_name = 'AutoglounModels'
-                split = path_data.split('AutogluonModels\\')                
-                if len(split) > 0:
-                    model_path = f"{folder_name}/{split[0]}"
-                    # record the model path into models_path_data.json
+                path_data = model_info.get('path', None) 
+                if path_data:                   
                     models_path_data = {}   
-                    models_path_data['model_path'] = model_path
+                    models_path_data['model_path'] = path_data
                     models_path_data['ppe'] = self.ppe
                     print(f'model_path_data: {models_path_data}')
-                    with open('models_path_data.json', 'a') as f:
-                        json.dump(models_path_data, f)
-                        f.write('\n')
+                    try:
+                        with open('models_path_data.json', 'a') as f:
+                            json.dump(models_path_data, f)
+                            f.write('\n')
+                        print("File updated successfully.")
+                    except Exception as e:
+                        print(f"An error occurred while updating the file: {e}")
 
             
 
