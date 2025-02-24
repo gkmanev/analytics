@@ -251,9 +251,8 @@ class PVForecast:
                 print(f"Model info: {model_info}")
                 path_data = model_info.get('path', None)
                 folder_name = 'AutoglounModels'
-                split = path_data.split('AutogluonModels\\')
-                print(f"split: {split}")
-                if len(split) > 1:
+                split = path_data.split('AutogluonModels\\')                
+                if len(split) > 0:
                     model_path = f"{folder_name}/{split[1]}"
                     # record the model path into models_path_data.json
                     models_path_data = {}   
