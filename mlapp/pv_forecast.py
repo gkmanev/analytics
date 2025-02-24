@@ -246,18 +246,20 @@ class PVForecast:
                     )
                 #best_model_name = predictor.model_best
                 #print(f"The best model is: {best_model_name}")
-                feature_importance = predictor.feature_importance(data=train_data)
-                print(f"Feature importance: {feature_importance}")
+                #feature_importance = predictor.feature_importance(data=train_data)                
                 model_info = predictor.info()
+                print(f"Model info: {model_info}")
                 path_data = model_info.get('path', None)
                 folder_name = 'AutoglounModels'
                 split = path_data.split('AutogluonModels\\')
+                print(f"split: {split}")
                 if len(split) > 1:
                     model_path = f"{folder_name}/{split[1]}"
                     # record the model path into models_path_data.json
                     models_path_data = {}   
                     models_path_data['model_path'] = model_path
                     models_path_data['ppe'] = self.ppe
+                    print(f'model_path_data: {models_path_data}')
                     with open('models_path_data.json', 'a') as f:
                         json.dump(models_path_data, f)
                         f.write('\n')

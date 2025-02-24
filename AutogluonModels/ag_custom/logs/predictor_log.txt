@@ -1,0 +1,1528 @@
+Beginning AutoGluon training... Time limit = 3000s
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       4.55 GB / 15.75 GB (28.9%)
+Disk Space Avail:   84.03 GB / 237.84 GB (35.3%)
+===================================================
+
+Fitting with arguments:
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': {'DeepAR': {'batch_size': 32,
+                                'early_stop_patience': 5,
+                                'epochs': 2,
+                                'learning_rate': 0.001,
+                                'verbose': 1}},
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 864,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 3000,
+ 'verbosity': 3}
+
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+
+Provided data contains following columns:
+	target: 'production'
+	known_covariates:
+		categorical:        []
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+===================================================
+
+Starting training. Start time is 2025-02-22 19:11:44
+Models that will be trained: ['DeepAR']
+Training timeseries model DeepAR. Training for up to 3000.0s of the 3000.0s of remaining time.
+	Time limit adjusted due to model hyperparameters: 2999.90s -> 2699.91s (ag.max_time_limit=None, ag.max_time_limit_ratio=0.9, ag.min_time_limit=0)
+	-0.6742       = Validation score (-WQL)
+	52.69   s     = Training runtime
+	5.96    s     = Validation (prediction) runtime
+Training complete. Models trained: ['DeepAR']
+Total runtime: 58.86 s
+Best model: DeepAR
+Best model score: -0.6742
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Computing feature importance
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Beginning AutoGluon training... Time limit = 3000s
+Beginning AutoGluon training... Time limit = 3000s
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.69 GB / 15.75 GB (48.8%)
+Disk Space Avail:   84.04 GB / 237.84 GB (35.3%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.69 GB / 15.75 GB (48.8%)
+Disk Space Avail:   84.04 GB / 237.84 GB (35.3%)
+===================================================
+
+Fitting with arguments:
+
+Fitting with arguments:
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': {'DeepAR': {'batch_size': 32,
+                                'early_stop_patience': 5,
+                                'epochs': 2,
+                                'learning_rate': 0.001,
+                                'verbose': 1}},
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 864,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 3000,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': {'DeepAR': {'batch_size': 32,
+                                'early_stop_patience': 5,
+                                'epochs': 2,
+                                'learning_rate': 0.001,
+                                'verbose': 1}},
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 864,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 3000,
+ 'verbosity': 3}
+
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+	target: 'production'
+	target: 'production'
+	known_covariates:
+	known_covariates:
+		categorical:        []
+		categorical:        []
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+===================================================
+===================================================
+
+Starting training. Start time is 2025-02-22 19:29:53
+
+Starting training. Start time is 2025-02-22 19:29:53
+Models that will be trained: ['DeepAR']
+Models that will be trained: ['DeepAR']
+Training timeseries model DeepAR. Training for up to 2999.9s of the 2999.9s of remaining time.
+Training timeseries model DeepAR. Training for up to 2999.9s of the 2999.9s of remaining time.
+	Time limit adjusted due to model hyperparameters: 2999.84s -> 2699.86s (ag.max_time_limit=None, ag.max_time_limit_ratio=0.9, ag.min_time_limit=0)
+	Time limit adjusted due to model hyperparameters: 2999.84s -> 2699.86s (ag.max_time_limit=None, ag.max_time_limit_ratio=0.9, ag.min_time_limit=0)
+	-0.6742       = Validation score (-WQL)
+	-0.6742       = Validation score (-WQL)
+	52.73   s     = Training runtime
+	52.73   s     = Training runtime
+	9.92    s     = Validation (prediction) runtime
+	9.92    s     = Validation (prediction) runtime
+Training complete. Models trained: ['DeepAR']
+Training complete. Models trained: ['DeepAR']
+Total runtime: 62.69 s
+Total runtime: 62.69 s
+Best model: DeepAR
+Best model: DeepAR
+Best model score: -0.6742
+Best model score: -0.6742
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Computing feature importance
+Computing feature importance
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Computing feature importance
+Computing feature importance
+Computing feature importance
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Loading predictor from path c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Beginning AutoGluon training... Time limit = 600s
+Beginning AutoGluon training... Time limit = 600s
+Beginning AutoGluon training... Time limit = 600s
+Beginning AutoGluon training... Time limit = 600s
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.74 GB / 15.75 GB (49.2%)
+Disk Space Avail:   84.04 GB / 237.84 GB (35.3%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.74 GB / 15.75 GB (49.2%)
+Disk Space Avail:   84.04 GB / 237.84 GB (35.3%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.74 GB / 15.75 GB (49.2%)
+Disk Space Avail:   84.04 GB / 237.84 GB (35.3%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.74 GB / 15.75 GB (49.2%)
+Disk Space Avail:   84.04 GB / 237.84 GB (35.3%)
+===================================================
+Setting presets to: fast_training
+Setting presets to: fast_training
+Setting presets to: fast_training
+Setting presets to: fast_training
+
+Fitting with arguments:
+
+Fitting with arguments:
+
+Fitting with arguments:
+
+Fitting with arguments:
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': 'very_light',
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 864,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 600,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': 'very_light',
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 864,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 600,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': 'very_light',
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 864,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 600,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': 'very_light',
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 864,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 600,
+ 'verbosity': 3}
+
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+	target: 'production'
+	target: 'production'
+	target: 'production'
+	target: 'production'
+	known_covariates:
+	known_covariates:
+	known_covariates:
+	known_covariates:
+		categorical:        []
+		categorical:        []
+		categorical:        []
+		categorical:        []
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+===================================================
+===================================================
+===================================================
+===================================================
+
+Starting training. Start time is 2025-02-22 19:56:38
+
+Starting training. Start time is 2025-02-22 19:56:38
+
+Starting training. Start time is 2025-02-22 19:56:38
+
+Starting training. Start time is 2025-02-22 19:56:38
+Models that will be trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Models that will be trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Models that will be trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Models that will be trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Training timeseries model Naive. Training for up to 99.1s of the 594.3s of remaining time.
+Training timeseries model Naive. Training for up to 99.1s of the 594.3s of remaining time.
+Training timeseries model Naive. Training for up to 99.1s of the 594.3s of remaining time.
+Training timeseries model Naive. Training for up to 99.1s of the 594.3s of remaining time.
+	-2.5523       = Validation score (-WQL)
+	-2.5523       = Validation score (-WQL)
+	-2.5523       = Validation score (-WQL)
+	-2.5523       = Validation score (-WQL)
+	0.01    s     = Training runtime
+	0.01    s     = Training runtime
+	0.01    s     = Training runtime
+	0.01    s     = Training runtime
+	2.80    s     = Validation (prediction) runtime
+	2.80    s     = Validation (prediction) runtime
+	2.80    s     = Validation (prediction) runtime
+	2.80    s     = Validation (prediction) runtime
+Training timeseries model SeasonalNaive. Training for up to 118.3s of the 591.5s of remaining time.
+Training timeseries model SeasonalNaive. Training for up to 118.3s of the 591.5s of remaining time.
+Training timeseries model SeasonalNaive. Training for up to 118.3s of the 591.5s of remaining time.
+Training timeseries model SeasonalNaive. Training for up to 118.3s of the 591.5s of remaining time.
+	-1.2189       = Validation score (-WQL)
+	-1.2189       = Validation score (-WQL)
+	-1.2189       = Validation score (-WQL)
+	-1.2189       = Validation score (-WQL)
+	0.01    s     = Training runtime
+	0.01    s     = Training runtime
+	0.01    s     = Training runtime
+	0.01    s     = Training runtime
+	2.29    s     = Validation (prediction) runtime
+	2.29    s     = Validation (prediction) runtime
+	2.29    s     = Validation (prediction) runtime
+	2.29    s     = Validation (prediction) runtime
+Training timeseries model RecursiveTabular. Training for up to 147.3s of the 589.2s of remaining time.
+Training timeseries model RecursiveTabular. Training for up to 147.3s of the 589.2s of remaining time.
+Training timeseries model RecursiveTabular. Training for up to 147.3s of the 589.2s of remaining time.
+Training timeseries model RecursiveTabular. Training for up to 147.3s of the 589.2s of remaining time.
+	Time limit adjusted due to model hyperparameters: 147.29s -> 132.56s (ag.max_time_limit=None, ag.max_time_limit_ratio=0.9, ag.min_time_limit=0)
+	Time limit adjusted due to model hyperparameters: 147.29s -> 132.56s (ag.max_time_limit=None, ag.max_time_limit_ratio=0.9, ag.min_time_limit=0)
+	Time limit adjusted due to model hyperparameters: 147.29s -> 132.56s (ag.max_time_limit=None, ag.max_time_limit_ratio=0.9, ag.min_time_limit=0)
+	Time limit adjusted due to model hyperparameters: 147.29s -> 132.56s (ag.max_time_limit=None, ag.max_time_limit_ratio=0.9, ag.min_time_limit=0)
+	-4.2604       = Validation score (-WQL)
+	-4.2604       = Validation score (-WQL)
+	-4.2604       = Validation score (-WQL)
+	-4.2604       = Validation score (-WQL)
+	1.72    s     = Training runtime
+	1.72    s     = Training runtime
+	1.72    s     = Training runtime
+	1.72    s     = Training runtime
+	40.07   s     = Validation (prediction) runtime
+	40.07   s     = Validation (prediction) runtime
+	40.07   s     = Validation (prediction) runtime
+	40.07   s     = Validation (prediction) runtime
+Training timeseries model DirectTabular. Training for up to 182.4s of the 547.3s of remaining time.
+Training timeseries model DirectTabular. Training for up to 182.4s of the 547.3s of remaining time.
+Training timeseries model DirectTabular. Training for up to 182.4s of the 547.3s of remaining time.
+Training timeseries model DirectTabular. Training for up to 182.4s of the 547.3s of remaining time.
+Disabling calibration for metric `pinball_loss` due to having fewer than 1000 rows of validation data for calibration, to avoid overfitting (864 rows). Force calibration via specifying `calibrate=True`. (calibrate='auto')
+Disabling calibration for metric `pinball_loss` due to having fewer than 1000 rows of validation data for calibration, to avoid overfitting (864 rows). Force calibration via specifying `calibrate=True`. (calibrate='auto')
+Disabling calibration for metric `pinball_loss` due to having fewer than 1000 rows of validation data for calibration, to avoid overfitting (864 rows). Force calibration via specifying `calibrate=True`. (calibrate='auto')
+Disabling calibration for metric `pinball_loss` due to having fewer than 1000 rows of validation data for calibration, to avoid overfitting (864 rows). Force calibration via specifying `calibrate=True`. (calibrate='auto')
+	-0.6057       = Validation score (-WQL)
+	-0.6057       = Validation score (-WQL)
+	-0.6057       = Validation score (-WQL)
+	-0.6057       = Validation score (-WQL)
+	5.55    s     = Training runtime
+	5.55    s     = Training runtime
+	5.55    s     = Training runtime
+	5.55    s     = Training runtime
+	0.27    s     = Validation (prediction) runtime
+	0.27    s     = Validation (prediction) runtime
+	0.27    s     = Validation (prediction) runtime
+	0.27    s     = Validation (prediction) runtime
+Training timeseries model ETS. Training for up to 270.7s of the 541.5s of remaining time.
+Training timeseries model ETS. Training for up to 270.7s of the 541.5s of remaining time.
+Training timeseries model ETS. Training for up to 270.7s of the 541.5s of remaining time.
+Training timeseries model ETS. Training for up to 270.7s of the 541.5s of remaining time.
+	-2.3169       = Validation score (-WQL)
+	-2.3169       = Validation score (-WQL)
+	-2.3169       = Validation score (-WQL)
+	-2.3169       = Validation score (-WQL)
+	0.03    s     = Training runtime
+	0.03    s     = Training runtime
+	0.03    s     = Training runtime
+	0.03    s     = Training runtime
+	8.25    s     = Validation (prediction) runtime
+	8.25    s     = Validation (prediction) runtime
+	8.25    s     = Validation (prediction) runtime
+	8.25    s     = Validation (prediction) runtime
+Training timeseries model Theta. Training for up to 533.1s of the 533.1s of remaining time.
+Training timeseries model Theta. Training for up to 533.1s of the 533.1s of remaining time.
+Training timeseries model Theta. Training for up to 533.1s of the 533.1s of remaining time.
+Training timeseries model Theta. Training for up to 533.1s of the 533.1s of remaining time.
+	-4.2508       = Validation score (-WQL)
+	-4.2508       = Validation score (-WQL)
+	-4.2508       = Validation score (-WQL)
+	-4.2508       = Validation score (-WQL)
+	0.02    s     = Training runtime
+	0.02    s     = Training runtime
+	0.02    s     = Training runtime
+	0.02    s     = Training runtime
+	32.91   s     = Validation (prediction) runtime
+	32.91   s     = Validation (prediction) runtime
+	32.91   s     = Validation (prediction) runtime
+	32.91   s     = Validation (prediction) runtime
+Training complete. Models trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Training complete. Models trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Training complete. Models trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Training complete. Models trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Total runtime: 99.77 s
+Total runtime: 99.77 s
+Total runtime: 99.77 s
+Total runtime: 99.77 s
+Best model: DirectTabular
+Best model: DirectTabular
+Best model: DirectTabular
+Best model: DirectTabular
+Best model score: -0.6057
+Best model score: -0.6057
+Best model score: -0.6057
+Best model score: -0.6057
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Computing feature importance
+Computing feature importance
+Computing feature importance
+Computing feature importance
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Beginning AutoGluon training... Time limit = 600s
+Beginning AutoGluon training... Time limit = 600s
+Beginning AutoGluon training... Time limit = 600s
+Beginning AutoGluon training... Time limit = 600s
+Beginning AutoGluon training... Time limit = 600s
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.21 GB / 15.75 GB (45.8%)
+Disk Space Avail:   84.10 GB / 237.84 GB (35.4%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.21 GB / 15.75 GB (45.8%)
+Disk Space Avail:   84.10 GB / 237.84 GB (35.4%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.21 GB / 15.75 GB (45.8%)
+Disk Space Avail:   84.10 GB / 237.84 GB (35.4%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.21 GB / 15.75 GB (45.8%)
+Disk Space Avail:   84.10 GB / 237.84 GB (35.4%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.21 GB / 15.75 GB (45.8%)
+Disk Space Avail:   84.10 GB / 237.84 GB (35.4%)
+===================================================
+Setting presets to: fast_training
+Setting presets to: fast_training
+Setting presets to: fast_training
+Setting presets to: fast_training
+Setting presets to: fast_training
+
+Fitting with arguments:
+
+Fitting with arguments:
+
+Fitting with arguments:
+
+Fitting with arguments:
+
+Fitting with arguments:
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': 'very_light',
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 288,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 600,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': 'very_light',
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 288,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 600,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': 'very_light',
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 288,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 600,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': 'very_light',
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 288,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 600,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': 'very_light',
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 288,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 600,
+ 'verbosity': 3}
+
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+	target: 'production'
+	target: 'production'
+	target: 'production'
+	target: 'production'
+	target: 'production'
+	known_covariates:
+	known_covariates:
+	known_covariates:
+	known_covariates:
+	known_covariates:
+		categorical:        []
+		categorical:        []
+		categorical:        []
+		categorical:        []
+		categorical:        []
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+===================================================
+===================================================
+===================================================
+===================================================
+===================================================
+
+Starting training. Start time is 2025-02-23 12:55:11
+
+Starting training. Start time is 2025-02-23 12:55:11
+
+Starting training. Start time is 2025-02-23 12:55:11
+
+Starting training. Start time is 2025-02-23 12:55:11
+
+Starting training. Start time is 2025-02-23 12:55:11
+Models that will be trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Models that will be trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Models that will be trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Models that will be trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Models that will be trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Training timeseries model Naive. Training for up to 100.0s of the 599.9s of remaining time.
+Training timeseries model Naive. Training for up to 100.0s of the 599.9s of remaining time.
+Training timeseries model Naive. Training for up to 100.0s of the 599.9s of remaining time.
+Training timeseries model Naive. Training for up to 100.0s of the 599.9s of remaining time.
+Training timeseries model Naive. Training for up to 100.0s of the 599.9s of remaining time.
+	-1.7235       = Validation score (-WQL)
+	-1.7235       = Validation score (-WQL)
+	-1.7235       = Validation score (-WQL)
+	-1.7235       = Validation score (-WQL)
+	-1.7235       = Validation score (-WQL)
+	0.05    s     = Training runtime
+	0.05    s     = Training runtime
+	0.05    s     = Training runtime
+	0.05    s     = Training runtime
+	0.05    s     = Training runtime
+	6.63    s     = Validation (prediction) runtime
+	6.63    s     = Validation (prediction) runtime
+	6.63    s     = Validation (prediction) runtime
+	6.63    s     = Validation (prediction) runtime
+	6.63    s     = Validation (prediction) runtime
+Training timeseries model SeasonalNaive. Training for up to 118.6s of the 593.2s of remaining time.
+Training timeseries model SeasonalNaive. Training for up to 118.6s of the 593.2s of remaining time.
+Training timeseries model SeasonalNaive. Training for up to 118.6s of the 593.2s of remaining time.
+Training timeseries model SeasonalNaive. Training for up to 118.6s of the 593.2s of remaining time.
+Training timeseries model SeasonalNaive. Training for up to 118.6s of the 593.2s of remaining time.
+	-0.9235       = Validation score (-WQL)
+	-0.9235       = Validation score (-WQL)
+	-0.9235       = Validation score (-WQL)
+	-0.9235       = Validation score (-WQL)
+	-0.9235       = Validation score (-WQL)
+	0.04    s     = Training runtime
+	0.04    s     = Training runtime
+	0.04    s     = Training runtime
+	0.04    s     = Training runtime
+	0.04    s     = Training runtime
+	4.78    s     = Validation (prediction) runtime
+	4.78    s     = Validation (prediction) runtime
+	4.78    s     = Validation (prediction) runtime
+	4.78    s     = Validation (prediction) runtime
+	4.78    s     = Validation (prediction) runtime
+Training timeseries model RecursiveTabular. Training for up to 147.1s of the 588.4s of remaining time.
+Training timeseries model RecursiveTabular. Training for up to 147.1s of the 588.4s of remaining time.
+Training timeseries model RecursiveTabular. Training for up to 147.1s of the 588.4s of remaining time.
+Training timeseries model RecursiveTabular. Training for up to 147.1s of the 588.4s of remaining time.
+Training timeseries model RecursiveTabular. Training for up to 147.1s of the 588.4s of remaining time.
+Warning: path already exists! This predictor may overwrite an existing predictor! path="c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom\models\RecursiveTabular\W0\tabular_predictor"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom\models\RecursiveTabular\W0\tabular_predictor"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom\models\RecursiveTabular\W0\tabular_predictor"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom\models\RecursiveTabular\W0\tabular_predictor"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom\models\RecursiveTabular\W0\tabular_predictor"
+	-2.2429       = Validation score (-WQL)
+	-2.2429       = Validation score (-WQL)
+	-2.2429       = Validation score (-WQL)
+	-2.2429       = Validation score (-WQL)
+	-2.2429       = Validation score (-WQL)
+	6.36    s     = Training runtime
+	6.36    s     = Training runtime
+	6.36    s     = Training runtime
+	6.36    s     = Training runtime
+	6.36    s     = Training runtime
+	15.45   s     = Validation (prediction) runtime
+	15.45   s     = Validation (prediction) runtime
+	15.45   s     = Validation (prediction) runtime
+	15.45   s     = Validation (prediction) runtime
+	15.45   s     = Validation (prediction) runtime
+Training timeseries model DirectTabular. Training for up to 188.8s of the 566.5s of remaining time.
+Training timeseries model DirectTabular. Training for up to 188.8s of the 566.5s of remaining time.
+Training timeseries model DirectTabular. Training for up to 188.8s of the 566.5s of remaining time.
+Training timeseries model DirectTabular. Training for up to 188.8s of the 566.5s of remaining time.
+Training timeseries model DirectTabular. Training for up to 188.8s of the 566.5s of remaining time.
+Warning: path already exists! This predictor may overwrite an existing predictor! path="c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom\models\DirectTabular\W0\tabular_predictor"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom\models\DirectTabular\W0\tabular_predictor"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom\models\DirectTabular\W0\tabular_predictor"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom\models\DirectTabular\W0\tabular_predictor"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom\models\DirectTabular\W0\tabular_predictor"
+Disabling calibration for metric `pinball_loss` due to having fewer than 1000 rows of validation data for calibration, to avoid overfitting (288 rows). Force calibration via specifying `calibrate=True`. (calibrate='auto')
+Disabling calibration for metric `pinball_loss` due to having fewer than 1000 rows of validation data for calibration, to avoid overfitting (288 rows). Force calibration via specifying `calibrate=True`. (calibrate='auto')
+Disabling calibration for metric `pinball_loss` due to having fewer than 1000 rows of validation data for calibration, to avoid overfitting (288 rows). Force calibration via specifying `calibrate=True`. (calibrate='auto')
+Disabling calibration for metric `pinball_loss` due to having fewer than 1000 rows of validation data for calibration, to avoid overfitting (288 rows). Force calibration via specifying `calibrate=True`. (calibrate='auto')
+Disabling calibration for metric `pinball_loss` due to having fewer than 1000 rows of validation data for calibration, to avoid overfitting (288 rows). Force calibration via specifying `calibrate=True`. (calibrate='auto')
+	-0.5588       = Validation score (-WQL)
+	-0.5588       = Validation score (-WQL)
+	-0.5588       = Validation score (-WQL)
+	-0.5588       = Validation score (-WQL)
+	-0.5588       = Validation score (-WQL)
+	11.83   s     = Training runtime
+	11.83   s     = Training runtime
+	11.83   s     = Training runtime
+	11.83   s     = Training runtime
+	11.83   s     = Training runtime
+	0.36    s     = Validation (prediction) runtime
+	0.36    s     = Validation (prediction) runtime
+	0.36    s     = Validation (prediction) runtime
+	0.36    s     = Validation (prediction) runtime
+	0.36    s     = Validation (prediction) runtime
+Training timeseries model ETS. Training for up to 277.2s of the 554.3s of remaining time.
+Training timeseries model ETS. Training for up to 277.2s of the 554.3s of remaining time.
+Training timeseries model ETS. Training for up to 277.2s of the 554.3s of remaining time.
+Training timeseries model ETS. Training for up to 277.2s of the 554.3s of remaining time.
+Training timeseries model ETS. Training for up to 277.2s of the 554.3s of remaining time.
+	-1.7240       = Validation score (-WQL)
+	-1.7240       = Validation score (-WQL)
+	-1.7240       = Validation score (-WQL)
+	-1.7240       = Validation score (-WQL)
+	-1.7240       = Validation score (-WQL)
+	0.04    s     = Training runtime
+	0.04    s     = Training runtime
+	0.04    s     = Training runtime
+	0.04    s     = Training runtime
+	0.04    s     = Training runtime
+	8.87    s     = Validation (prediction) runtime
+	8.87    s     = Validation (prediction) runtime
+	8.87    s     = Validation (prediction) runtime
+	8.87    s     = Validation (prediction) runtime
+	8.87    s     = Validation (prediction) runtime
+Training timeseries model Theta. Training for up to 545.4s of the 545.4s of remaining time.
+Training timeseries model Theta. Training for up to 545.4s of the 545.4s of remaining time.
+Training timeseries model Theta. Training for up to 545.4s of the 545.4s of remaining time.
+Training timeseries model Theta. Training for up to 545.4s of the 545.4s of remaining time.
+Training timeseries model Theta. Training for up to 545.4s of the 545.4s of remaining time.
+	-2.9532       = Validation score (-WQL)
+	-2.9532       = Validation score (-WQL)
+	-2.9532       = Validation score (-WQL)
+	-2.9532       = Validation score (-WQL)
+	-2.9532       = Validation score (-WQL)
+	0.04    s     = Training runtime
+	0.04    s     = Training runtime
+	0.04    s     = Training runtime
+	0.04    s     = Training runtime
+	0.04    s     = Training runtime
+	43.12   s     = Validation (prediction) runtime
+	43.12   s     = Validation (prediction) runtime
+	43.12   s     = Validation (prediction) runtime
+	43.12   s     = Validation (prediction) runtime
+	43.12   s     = Validation (prediction) runtime
+Training complete. Models trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Training complete. Models trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Training complete. Models trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Training complete. Models trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Training complete. Models trained: ['Naive', 'SeasonalNaive', 'RecursiveTabular', 'DirectTabular', 'ETS', 'Theta']
+Total runtime: 97.75 s
+Total runtime: 97.75 s
+Total runtime: 97.75 s
+Total runtime: 97.75 s
+Total runtime: 97.75 s
+Best model: DirectTabular
+Best model: DirectTabular
+Best model: DirectTabular
+Best model: DirectTabular
+Best model: DirectTabular
+Best model score: -0.5588
+Best model score: -0.5588
+Best model score: -0.5588
+Best model score: -0.5588
+Best model score: -0.5588
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Computing feature importance
+Computing feature importance
+Computing feature importance
+Computing feature importance
+Computing feature importance
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Model not specified in predict, will default to the model with the best validation score: DirectTabular
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Warning: path already exists! This predictor may overwrite an existing predictor! path="AutogluonModels/ag_custom"
+Beginning AutoGluon training... Time limit = 3000s
+Beginning AutoGluon training... Time limit = 3000s
+Beginning AutoGluon training... Time limit = 3000s
+Beginning AutoGluon training... Time limit = 3000s
+Beginning AutoGluon training... Time limit = 3000s
+Beginning AutoGluon training... Time limit = 3000s
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+AutoGluon will save models to 'c:\Users\Georgi\test_gluon\AutogluonModels\ag_custom'
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.19 GB / 15.75 GB (45.7%)
+Disk Space Avail:   84.10 GB / 237.84 GB (35.4%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.19 GB / 15.75 GB (45.7%)
+Disk Space Avail:   84.10 GB / 237.84 GB (35.4%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.19 GB / 15.75 GB (45.7%)
+Disk Space Avail:   84.10 GB / 237.84 GB (35.4%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.19 GB / 15.75 GB (45.7%)
+Disk Space Avail:   84.10 GB / 237.84 GB (35.4%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.19 GB / 15.75 GB (45.7%)
+Disk Space Avail:   84.10 GB / 237.84 GB (35.4%)
+===================================================
+=================== System Info ===================
+AutoGluon Version:  1.2
+Python Version:     3.9.10
+Operating System:   Windows
+Platform Machine:   AMD64
+Platform Version:   10.0.19045
+CPU Count:          8
+GPU Count:          0
+Memory Avail:       7.19 GB / 15.75 GB (45.7%)
+Disk Space Avail:   84.10 GB / 237.84 GB (35.4%)
+===================================================
+
+Fitting with arguments:
+
+Fitting with arguments:
+
+Fitting with arguments:
+
+Fitting with arguments:
+
+Fitting with arguments:
+
+Fitting with arguments:
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': {'DeepAR': {'batch_size': 32,
+                                'early_stop_patience': 5,
+                                'epochs': 2,
+                                'learning_rate': 0.001,
+                                'verbose': 1}},
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 288,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 3000,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': {'DeepAR': {'batch_size': 32,
+                                'early_stop_patience': 5,
+                                'epochs': 2,
+                                'learning_rate': 0.001,
+                                'verbose': 1}},
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 288,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 3000,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': {'DeepAR': {'batch_size': 32,
+                                'early_stop_patience': 5,
+                                'epochs': 2,
+                                'learning_rate': 0.001,
+                                'verbose': 1}},
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 288,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 3000,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': {'DeepAR': {'batch_size': 32,
+                                'early_stop_patience': 5,
+                                'epochs': 2,
+                                'learning_rate': 0.001,
+                                'verbose': 1}},
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 288,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 3000,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': {'DeepAR': {'batch_size': 32,
+                                'early_stop_patience': 5,
+                                'epochs': 2,
+                                'learning_rate': 0.001,
+                                'verbose': 1}},
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 288,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 3000,
+ 'verbosity': 3}
+
+{'enable_ensemble': False,
+ 'eval_metric': WQL,
+ 'freq': '15min',
+ 'hyperparameters': {'DeepAR': {'batch_size': 32,
+                                'early_stop_patience': 5,
+                                'epochs': 2,
+                                'learning_rate': 0.001,
+                                'verbose': 1}},
+ 'known_covariates_names': ['temperature_2m',
+                            'cloud_cover',
+                            'cloud_cover_low',
+                            'wind_speed_10m',
+                            'direct_radiation',
+                            'diffuse_radiation',
+                            'global_tilted_irradiance'],
+ 'num_val_windows': 1,
+ 'prediction_length': 288,
+ 'quantile_levels': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+ 'random_seed': 123,
+ 'refit_every_n_windows': 1,
+ 'refit_full': False,
+ 'skip_model_selection': False,
+ 'target': 'production',
+ 'time_limit': 3000,
+ 'verbosity': 3}
+
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+Provided train_data has 2976 rows, 1 time series. Median time series length is 2976 (min=2976, max=2976). 
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+
+Provided data contains following columns:
+	target: 'production'
+	target: 'production'
+	target: 'production'
+	target: 'production'
+	target: 'production'
+	target: 'production'
+	known_covariates:
+	known_covariates:
+	known_covariates:
+	known_covariates:
+	known_covariates:
+	known_covariates:
+		categorical:        []
+		categorical:        []
+		categorical:        []
+		categorical:        []
+		categorical:        []
+		categorical:        []
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+		continuous (float): ['temperature_2m', 'cloud_cover', 'cloud_cover_low', 'wind_speed_10m', 'direct_radiation', 'diffuse_radiation', ...]
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+To learn how to fix incorrectly inferred types, please see documentation for TimeSeriesPredictor.fit
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+
+AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+	This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+===================================================
+===================================================
+===================================================
+===================================================
+===================================================
+===================================================
+
+Starting training. Start time is 2025-02-23 13:24:28
+
+Starting training. Start time is 2025-02-23 13:24:28
+
+Starting training. Start time is 2025-02-23 13:24:28
+
+Starting training. Start time is 2025-02-23 13:24:28
+
+Starting training. Start time is 2025-02-23 13:24:28
+
+Starting training. Start time is 2025-02-23 13:24:28
+Models that will be trained: ['DeepAR']
+Models that will be trained: ['DeepAR']
+Models that will be trained: ['DeepAR']
+Models that will be trained: ['DeepAR']
+Models that will be trained: ['DeepAR']
+Models that will be trained: ['DeepAR']
+Training timeseries model DeepAR. Training for up to 3000.0s of the 3000.0s of remaining time.
+Training timeseries model DeepAR. Training for up to 3000.0s of the 3000.0s of remaining time.
+Training timeseries model DeepAR. Training for up to 3000.0s of the 3000.0s of remaining time.
+Training timeseries model DeepAR. Training for up to 3000.0s of the 3000.0s of remaining time.
+Training timeseries model DeepAR. Training for up to 3000.0s of the 3000.0s of remaining time.
+Training timeseries model DeepAR. Training for up to 3000.0s of the 3000.0s of remaining time.
+	-0.6323       = Validation score (-WQL)
+	-0.6323       = Validation score (-WQL)
+	-0.6323       = Validation score (-WQL)
+	-0.6323       = Validation score (-WQL)
+	-0.6323       = Validation score (-WQL)
+	-0.6323       = Validation score (-WQL)
+	19.08   s     = Training runtime
+	19.08   s     = Training runtime
+	19.08   s     = Training runtime
+	19.08   s     = Training runtime
+	19.08   s     = Training runtime
+	19.08   s     = Training runtime
+	2.09    s     = Validation (prediction) runtime
+	2.09    s     = Validation (prediction) runtime
+	2.09    s     = Validation (prediction) runtime
+	2.09    s     = Validation (prediction) runtime
+	2.09    s     = Validation (prediction) runtime
+	2.09    s     = Validation (prediction) runtime
+Training complete. Models trained: ['DeepAR']
+Training complete. Models trained: ['DeepAR']
+Training complete. Models trained: ['DeepAR']
+Training complete. Models trained: ['DeepAR']
+Training complete. Models trained: ['DeepAR']
+Training complete. Models trained: ['DeepAR']
+Total runtime: 21.21 s
+Total runtime: 21.21 s
+Total runtime: 21.21 s
+Total runtime: 21.21 s
+Total runtime: 21.21 s
+Total runtime: 21.21 s
+Best model: DeepAR
+Best model: DeepAR
+Best model: DeepAR
+Best model: DeepAR
+Best model: DeepAR
+Best model: DeepAR
+Best model score: -0.6323
+Best model score: -0.6323
+Best model score: -0.6323
+Best model score: -0.6323
+Best model score: -0.6323
+Best model score: -0.6323
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Computing feature importance
+Computing feature importance
+Computing feature importance
+Computing feature importance
+Computing feature importance
+Computing feature importance
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Subsample_size 50 is larger than the number of items in the data and will be ignored
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
+Model not specified in predict, will default to the model with the best validation score: DeepAR
