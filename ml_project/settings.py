@@ -114,7 +114,7 @@ CELERY_BEAT_SCHEDULE = {
     },
     'schedule_pv_forecast_five_ten_task': {
         'task': 'mlapp.tasks.pv_forecast_five_ten_task',
-        'schedule': crontab(hour=13, minute=48),
+        'schedule': crontab(hour=11, minute=6),
     },
 }
 

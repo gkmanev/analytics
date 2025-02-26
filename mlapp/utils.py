@@ -96,7 +96,7 @@ def pv_forecast_first_five():
             forecast.train_model()
 
 def pv_forecast_five_ten():
-    five_ten_projects = prepare_project_mapping()[5:10]
+    five_ten_projects = prepare_project_mapping()[5:]
     today = datetime.now().date() - timedelta(days=3)
     end_date = today.strftime('%Y-%m-%d')
     end_date = '2025-01-31'
