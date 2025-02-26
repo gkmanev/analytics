@@ -84,8 +84,9 @@ def today_resample_data(resolution):
 
 def pv_forecast_first_five():    
     first_five_projects = prepare_project_mapping()[:5]
-    today = datetime.now().date() - timedelta(days=1)
+    today = datetime.now().date() - timedelta(days=3)
     end_date = today.strftime('%Y-%m-%d')
+    
     
     for it in first_five_projects:
         ppe = it.get("PPE", None)
@@ -96,13 +97,14 @@ def pv_forecast_first_five():
 
 def pv_forecast_five_ten():
     five_ten_projects = prepare_project_mapping()[5:10]
-    today = datetime.now().date() - timedelta(days=1)
+    today = datetime.now().date() - timedelta(days=3)
     end_date = today.strftime('%Y-%m-%d')
+    end_date = '2025-01-31'
     
     for it in five_ten_projects:        
         ppe = it.get("PPE", None)
         farm = it.get("farm", None)
-        if ppe is not None and ppe == '590310600030911897':                                    
+        if ppe is not None:                                    
             forecast = PVForecast(end_date, ppe=ppe, farm=farm)
             forecast.train_model()
 

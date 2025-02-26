@@ -13,6 +13,7 @@ import plotly.graph_objects as go
 import plotly.io as pio
 import plotly.offline as pyo
 import json
+import os
 
 
 class PVForecast:
@@ -208,19 +209,22 @@ class PVForecast:
 
                 #Fit the predictor with cross-validation
                 results = predictor.fit(
-                    train_data=train_data,    
-                    hyperparameters={
-                        "DeepAR": {
-                            # You can specify DeepAR-specific hyperparameters here
-                            # For example:
-                            "context_length": 576,
-                            "num_layers": 3,
-                            "hidden_size": 480,
-                            "dropout_rate": 0.1,
-                            "learning_rate": 1e-3
-                        }
-                    },     
-                    time_limit=1200      
+
+                    train_data=train_data,  
+                    presets="fast_training",
+                    time_limit=600,
+                    # hyperparameters={
+                    #     "DeepAR": {
+                    #         # You can specify DeepAR-specific hyperparameters here
+                    #         # For example:
+                    #         "context_length": 576,
+                    #         "num_layers": 3,
+                    #         "hidden_size": 480,
+                    #         "dropout_rate": 0.1,
+                    #         "learning_rate": 1e-3
+                    #     }
+                    # },     
+                    
                 )                             
   
                 predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
@@ -234,7 +238,10 @@ class PVForecast:
                     prediction = predict["0.9"]    
                     # check if prediction < 5
                     if prediction < 5:
-                        prediction = 0                                     
+                        prediction = 0  
+                    # if timestamp < 08:00 or timestamp > 20:00
+                    if timestamp.hour < 8 or timestamp.hour > 20:
+                        prediction = 0                                   
                     # Check if the datapoint exists
                     obj, created = PVForecastModel.objects.update_or_create(
                     timestamp=timestamp,
@@ -256,10 +263,21 @@ class PVForecast:
                     models_path_data['ppe'] = self.ppe
                     print(f'model_path_data: {models_path_data}')
                     try:
-                        with open('models_path_data.json', 'a') as f:
-                            json.dump(models_path_data, f)
-                            f.write('\n')
-                        print("File updated successfully.")
+                        if os.path.exists('models_path_data.json'):
+                            with open('models_path_data.json', 'r') as f:
+                                data = json.load(f)
+                        else:
+                            data = []
+
+                        if models_path_data not in data:
+                            data.append(models_path_data)
+                        
+                        print(f"Data: {data}")
+
+                        # Write the updated list back to the file
+                        with open('models_path_data.json', 'w') as f:
+                            json.dump(data, f, indent=4)
+                            print("File updated successfully.")
                     except Exception as e:
                         print(f"An error occurred while updating the file: {e}")
 

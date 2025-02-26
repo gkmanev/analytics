@@ -1,1 +1,10 @@
-{"model_path": "AutoglounModels/ag-20250221_095633", "ppe": "111111111"}
+[
+    {
+        "model_path": "AutoglounModels/ag-20250221_095633",
+        "ppe": "111111111"
+    },
+    {
+        "model_path": "AutogluonModels/ag-20250224_114806",
+        "ppe": "590310600030911897"
+    }
+]
