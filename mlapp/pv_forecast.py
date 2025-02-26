@@ -237,7 +237,7 @@ class PVForecast:
                     
                     prediction = predict["0.9"]    
                     # check if prediction < 5
-                    if prediction < 5:
+                    if prediction < 10:
                         prediction = 0  
                     # if timestamp < 08:00 or timestamp > 20:00
                     if timestamp.hour < 8 or timestamp.hour > 20:
@@ -254,14 +254,14 @@ class PVForecast:
                 #best_model_name = predictor.model_best
                 #print(f"The best model is: {best_model_name}")
                 #feature_importance = predictor.feature_importance(data=train_data)                
-                model_info = predictor.info()
-                print(f"Model info: {model_info}")
+                model_info = predictor.info()                
                 path_data = model_info.get('path', None) 
                 if path_data:                   
                     models_path_data = {}   
                     models_path_data['model_path'] = path_data
                     models_path_data['ppe'] = self.ppe
-                    print(f'model_path_data: {models_path_data}')
+                    models_path_data['date'] = self.end_date
+                    
                     try:
                         if os.path.exists('models_path_data.json'):
                             with open('models_path_data.json', 'r') as f:
