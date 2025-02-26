@@ -98,8 +98,7 @@ def pv_forecast_first_five():
 def pv_forecast_five_ten():
     five_ten_projects = prepare_project_mapping()[5:]
     today = datetime.now().date() - timedelta(days=3)
-    end_date = today.strftime('%Y-%m-%d')
-    end_date = '2025-01-31'
+    end_date = today.strftime('%Y-%m-%d')   
     
     for it in five_ten_projects:        
         ppe = it.get("PPE", None)
