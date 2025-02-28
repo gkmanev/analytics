@@ -100,6 +100,7 @@ CELERY_RESULT_BACKEND = os.getenv("CELERY_BACKEND", "redis://redis:6379/0")
 
 # Celery Beat Configuration
 CELERY_BEAT_SCHEDULE = {
+
     'todaty_correlation': {
         'task': 'mlapp.tasks.today_correlation_task',
         'schedule': crontab(hour=23, minute=59),
@@ -110,11 +111,11 @@ CELERY_BEAT_SCHEDULE = {
     },
     'schedule_pv_forecast_first_five_task': {
         'task': 'mlapp.tasks.pv_forecast_first_five_task',
-        'schedule': crontab(hour=12, minute=3),
+        'schedule': crontab(hour=10, minute=48),
     },
     'schedule_pv_forecast_five_ten_task': {
         'task': 'mlapp.tasks.pv_forecast_five_ten_task',
-        'schedule': crontab(hour=12, minute=10),
+        'schedule': crontab(hour=11, minute=3),
     },
 }
 
