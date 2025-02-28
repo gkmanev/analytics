@@ -92,7 +92,7 @@ CORS_ORIGIN_ALLOW_ALL=True
 # Celery Configuration Options
 CELERY_TIMEZONE = "Europe/Sofia"
 CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT = 45 * 60
+CELERY_TASK_TIME_LIMIT = 120 * 60
 
 # Celery Configuration
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER", "redis://redis:6379/0")
@@ -111,7 +111,7 @@ CELERY_BEAT_SCHEDULE = {
     },
     'schedule_pv_forecast_first_five_task': {
         'task': 'mlapp.tasks.pv_forecast_first_five_task',
-        'schedule': crontab(hour=10, minute=48),
+        'schedule': crontab(hour=11, minute=28),
     },
     'schedule_pv_forecast_five_ten_task': {
         'task': 'mlapp.tasks.pv_forecast_five_ten_task',

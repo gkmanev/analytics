@@ -14,6 +14,8 @@ import plotly.io as pio
 import plotly.offline as pyo
 import json
 import os
+from lightning.pytorch.callbacks import EarlyStopping
+
 
 
 class PVForecast:
@@ -211,19 +213,22 @@ class PVForecast:
                 results = predictor.fit(
 
                     train_data=train_data,  
-                    presets="fast_training",
-                    time_limit=600,
-                    # hyperparameters={
-                    #     "DeepAR": {
-                    #         # You can specify DeepAR-specific hyperparameters here
-                    #         # For example:
-                    #         "context_length": 576,
-                    #         "num_layers": 3,
-                    #         "hidden_size": 480,
-                    #         "dropout_rate": 0.1,
-                    #         "learning_rate": 1e-3
-                    #     }
-                    # },     
+                    # presets="fast_training",
+                    time_limit=1200,
+                    eval_metric="MASE",
+                    hyperparameters={
+                        "DeepAR": {
+                            # You can specify DeepAR-specific hyperparameters here
+                            # For example:
+                            "context_length": 576,
+                            "num_layers": 3,
+                            "hidden_size": 480,
+                            "dropout_rate": 0.2,
+                            "learning_rate": 1e-3,
+                            "epochs": 100,  # Added epochs parameter
+                            "callbacks": [EarlyStopping(monitor="val_loss", patience=20, mode="min")]
+                        }
+                    },     
                     
                 )                             
   
