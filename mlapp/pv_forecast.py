@@ -215,7 +215,6 @@ class PVForecast:
                     train_data=train_data,  
                     # presets="fast_training",
                     time_limit=1200,
-                    eval_metric="MASE",
                     hyperparameters={
                         "DeepAR": {
                             # You can specify DeepAR-specific hyperparameters here
