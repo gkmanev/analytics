@@ -20,7 +20,7 @@ services:
       - db
     volumes:
       - .:/code
-      - ./data:/app/data  # <--- Add this line to persist the JSON file
+      - models_data:/app/data  # <-- Named volume instead of relative path
     restart: always
     deploy:
       resources:
@@ -87,3 +87,4 @@ services:
 
 volumes:
   postgres_data_new:
+  models_data:  # <--- Add a named volume for the JSON file
