@@ -20,6 +20,7 @@ services:
       - db
     volumes:
       - .:/code
+      - ./data:/app/data  # <--- Add this line to persist the JSON file
     restart: always
     deploy:
       resources:

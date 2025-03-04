@@ -259,7 +259,10 @@ class PVForecast:
                 #print(f"The best model is: {best_model_name}")
                 #feature_importance = predictor.feature_importance(data=train_data)                
                 model_info = predictor.info()                
-                path_data = model_info.get('path', None) 
+                path_data = model_info.get('path', None)
+                # Ensure the directory exists
+                os.makedirs("/app/data", exist_ok=True)                
+                file_path = "/app/data/models_path_data.json"
                 if path_data:                   
                     models_path_data = {}   
                     models_path_data['model_path'] = path_data
@@ -267,8 +270,8 @@ class PVForecast:
                     models_path_data['date'] = self.end_date
                     
                     try:
-                        if os.path.exists('models_path_data.json'):
-                            with open('models_path_data.json', 'r') as f:
+                        if os.path.exists(file_path):
+                            with open(file_path, 'r') as f:
                                 data = json.load(f)
                         else:
                             data = []
@@ -279,7 +282,7 @@ class PVForecast:
                         print(f"Data: {data}")
 
                         # Write the updated list back to the file
-                        with open('models_path_data.json', 'w') as f:
+                        with open(file_path, 'w') as f:
                             json.dump(data, f, indent=4)
                             print("File updated successfully.")
                     except Exception as e:
