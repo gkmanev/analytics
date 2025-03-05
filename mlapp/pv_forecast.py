@@ -202,7 +202,7 @@ class PVForecast:
                 # files = os.listdir(model_save_path)
                 # print(f"Files in {model_save_path}:{files}")
                 model_save_path = "/app/data/model_590310600031289575_2025-03-02"
-                predictor = TimeSeriesPredictor.load(model_save_path)
+                predictor = TimeSeriesPredictor.load(model_save_path, require_version_match=False)
                 # else:                
                 #     #Initialize the predictor
                 #     predictor = TimeSeriesPredictor(
