@@ -198,41 +198,41 @@ class PVForecast:
                     timestamp_column="timestamp"
                 )
 
-                # model_save_path = f"/app/data/model_{self.ppe}_{self.end_date}"
+                model_save_path = f"/app/data/fastmodel_{self.ppe}_{self.end_date}"
                 # files = os.listdir(model_save_path)
                 # print(f"Files in {model_save_path}:{files}")
-                model_save_path = "/app/data/model_590310600031289575_2025-03-02"
-                predictor = TimeSeriesPredictor.load(model_save_path, require_version_match=False)
-                # else:                
-                #     #Initialize the predictor
-                #     predictor = TimeSeriesPredictor(
-                #         target=target_column,    
-                #         prediction_length=480,
-                #         freq='15min',
-                #         known_covariates_names=known_covariates,
-                #         path=model_save_path  # Set the path here
-                #     )
+                #model_save_path = "/app/data/model_590310600031289575_2025-03-02"
+                #predictor = TimeSeriesPredictor.load(model_save_path, require_version_match=False)
+                                
+                #Initialize the predictor
+                predictor = TimeSeriesPredictor(
+                    target=target_column,    
+                    prediction_length=480,
+                    freq='15min',
+                    known_covariates_names=known_covariates,
+                    path=model_save_path  # Set the path here
+                )
 
-                #     #Fit the predictor with cross-validation
-                #     results = predictor.fit(
-                #         train_data=train_data,  
-                #         #presets="fast_training",
-                #         time_limit=1200,
-                #         hyperparameters={
-                #             "DeepAR": {
-                #                 # You can specify DeepAR-specific hyperparameters here
-                #                 # For example:
-                #                 "context_length": 576,
-                #                 "num_layers": 3,
-                #                 "hidden_size": 480,
-                #                 "dropout_rate": 0.2,
-                #                 "learning_rate": 1e-3,
-                #                 "epochs": 100,  # Added epochs parameter
-                #                 "callbacks": [EarlyStopping(monitor="val_loss", patience=20, mode="min")]
-                #             }
-                #         },     
-                        
-                #     )                             
+                #Fit the predictor with cross-validation
+                results = predictor.fit(
+                    train_data=train_data,  
+                    presets="fast_training",
+                    #time_limit=1200,
+                    # hyperparameters={
+                    #     "DeepAR": {
+                    #         # You can specify DeepAR-specific hyperparameters here
+                    #         # For example:
+                    #         "context_length": 576,
+                    #         "num_layers": 3,
+                    #         "hidden_size": 480,
+                    #         "dropout_rate": 0.2,
+                    #         "learning_rate": 1e-3,
+                    #         "epochs": 100,  # Added epochs parameter
+                    #         "callbacks": [EarlyStopping(monitor="val_loss", patience=20, mode="min")]
+                    #     }
+                    # },     
+                    
+                )                             
              
                 predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
                 predictions.reset_index(inplace=True)
