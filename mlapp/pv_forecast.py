@@ -199,9 +199,8 @@ class PVForecast:
                 )
 
                 model_save_path = f"/app/data/model_{self.ppe}_{self.end_date}"
-                if os.path.exists(model_save_path):
-                    files = os.listdir(model_save_path)
-                    print(f"Files in {model_save_path}:{files}")
+                files = os.listdir(model_save_path)
+                print(f"Files in {model_save_path}:{files}")
                 if os.path.exists(model_save_path):
                     predictor = TimeSeriesPredictor.load(model_save_path)
                 else:                
