@@ -207,7 +207,8 @@ class PVForecast:
                         target=target_column,    
                         prediction_length=480,
                         freq='15min',
-                        known_covariates_names=known_covariates
+                        known_covariates_names=known_covariates,
+                        path=model_save_path  # Set the path here
                     )
 
                     #Fit the predictor with cross-validation
@@ -256,8 +257,8 @@ class PVForecast:
                         'production_forecast': prediction
                     }
                     )
-                predictor.save(model_save_path)
-                print("Model saved")
+                predictor.save()
+                print(f"Model saved: {model_save_path}")
 
             
 
