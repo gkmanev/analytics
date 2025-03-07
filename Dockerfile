@@ -36,6 +36,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Install additional packages
 RUN pip install -U setuptools wheel
 
+RUN pip install numpy>=2.0.0,<3.0.0
+
 RUN pip install autogluon
 # # Install PyTorch and AutoGluon
 # RUN pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cpu
