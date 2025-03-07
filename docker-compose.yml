@@ -19,8 +19,7 @@ services:
       - redis
       - db
     volumes:
-      - .:/code
-      - ml-models-data:/app/ml-models  # <-- Named volume instead of relative path
+      - .:/code     
     restart: always
     deploy:
       resources:
@@ -87,6 +86,6 @@ services:
 
 volumes:
   postgres_data_new:
-  ml-models-data:
+
   
 
