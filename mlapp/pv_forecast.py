@@ -197,6 +197,10 @@ class PVForecast:
                     id_column="item_id",
                     timestamp_column="timestamp"
                 )
+                # check if there is AutogluonModels folder in project root and lists its folders content
+                # if not, create it
+                print(os.listdir("AutogluonModels"))
+
                 # model_save_path = "/app/data/fastmodel_590310600031289575_2025-03-02"
                 # predictor = TimeSeriesPredictor.load(model_save_path)
                                 
