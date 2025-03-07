@@ -36,7 +36,7 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Install additional packages
 RUN pip install -U setuptools wheel
 
-RUN pip install "numpy>=2.0.0,<3.0.0"
+RUN pip install numpy==1.23.5
 
 RUN pip install autogluon
 # # Install PyTorch and AutoGluon
