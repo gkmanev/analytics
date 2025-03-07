@@ -20,7 +20,7 @@ services:
       - db
     volumes:
       - .:/code
-      - ./AutogluonModels:/app/ml-models  # <-- Named volume instead of relative path
+      - ml-models-data:/app/ml-models  # <-- Named volume instead of relative path
     restart: always
     deploy:
       resources:
@@ -87,5 +87,6 @@ services:
 
 volumes:
   postgres_data_new:
+  ml-models-data:
   
 
