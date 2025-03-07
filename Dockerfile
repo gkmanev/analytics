@@ -36,7 +36,8 @@ RUN pip install -U setuptools wheel
 
 # Install PyTorch and AutoGluon
 RUN pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cpu
-RUN pip install autogluon.timeseries
+#RUN pip install autogluon.timeseries
+RUN pip install autogluon==1.2
 
 # Copy project files
 COPY . /app/
