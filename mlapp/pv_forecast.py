@@ -202,6 +202,7 @@ class PVForecast:
                 print(os.listdir("/app/ml-models"))
                 dir = os.listdir("/app/ml-models")
                 model_name = 'fast_training_model_2025-03-07_14-15-32'
+                model_save_path = f"/app/ml-models/{model_name}"
                 if model_name in dir:                    
                     predictor = TimeSeriesPredictor.load(model_save_path)
                     predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
