@@ -201,10 +201,10 @@ class PVForecast:
                 os.makedirs("/app/ml-models", exist_ok=True)
                 print(os.listdir("/app/ml-models"))
                 dir = os.listdir("/app/ml-models")
-                model_name = 'fast_training_model_2025-03-07_14-34-05'
-                model_save_path = f"/app/ml-models/{model_name}"
+                model_name = 'fast_training_model_2025-03-07_14-44-05'
+                model_path = f"/app/ml-models/{model_name}"
                 if model_name in dir:                    
-                    predictor = TimeSeriesPredictor.load(model_save_path)
+                    predictor = TimeSeriesPredictor.load(model_path)
                     predictions = predictor.predict(data=train_data, known_covariates=future_covariates)
 
                 else:
