@@ -199,9 +199,9 @@ class PVForecast:
                 )
                 # check if there is AutogluonModels folder in project root and lists its folders content
                 # if not, create it
-                print(os.listdir("AutogluonModels"))
+                print(os.listdir("/app/ml-models"))
 
-                # model_save_path = "/app/data/fastmodel_590310600031289575_2025-03-02"
+                model_save_path = f"/app/ml-models/fast_training_model_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
                 # predictor = TimeSeriesPredictor.load(model_save_path)
                                 
                 #Initialize the predictor
@@ -210,7 +210,7 @@ class PVForecast:
                     prediction_length=480,
                     freq='15min',
                     known_covariates_names=known_covariates,
-                    #path=model_save_path  # Set the path here
+                    path=model_save_path  # Set the path here
                 )
 
                 #Fit the predictor with cross-validation
@@ -257,7 +257,7 @@ class PVForecast:
                         'production_forecast': prediction
                     }
                     )
-                # predictor.save()
+                predictor.save()
                 # print(f"Model saved: {model_save_path}")
 
             
