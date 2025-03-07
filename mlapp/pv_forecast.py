@@ -198,7 +198,7 @@ class PVForecast:
                     timestamp_column="timestamp"
                 )
                 # check if there is AutogluonModels folder in project root and lists its folders content
-                # if not, create it
+                os.makedirs("/app/ml-models", exist_ok=True)
                 print(os.listdir("/app/ml-models"))
 
                 model_save_path = f"/app/ml-models/fast_training_model_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}"
