@@ -168,7 +168,7 @@ class PVForecast:
             timestamp_column="timestamp"
         )        
         # get the timestamp of the last row of the future_covariates
-        last_timestamp = future_covariates["timestamp"].iloc[-1]
+        last_timestamp = forecast_df["timestamp"].iloc[-1]
         # get the last timestamp of the future_covariates
 
         print(f"Future covariates last timestamp: {last_timestamp}")
