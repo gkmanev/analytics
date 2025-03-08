@@ -144,7 +144,8 @@ class PVForecast:
         combined_weather_and_df_dam.dropna(inplace=True)
 
         combined_weather_and_df_dam = combined_weather_and_df_dam.iloc[:-1]
-
+        # Print combined_weather_and_df_dam last row timestamp
+        print(f"Combined weather and df_dam last row timestamp: {combined_weather_and_df_dam['timestamp'].iloc[-1]}")
         return combined_weather_and_df_dam
     
     def prepare_covariates(self):
@@ -167,10 +168,12 @@ class PVForecast:
             id_column="item_id",
             timestamp_column="timestamp"
         )        
-        # get the timestamp of the last row of the future_covariates
-        last_timestamp = forecast_df["timestamp"].iloc[-1]
+        # get the timestamp of the first and last row of the future_covariates
+        first_timestamp = forecast_df['timestamp'].iloc[0] # get the first timestamp of the future_covariates
+        
         # get the last timestamp of the future_covariates
-
+        last_timestamp = forecast_df['timestamp'].iloc[-1]
+        print(f"Future covariates first timestamp: {first_timestamp}")
         print(f"Future covariates last timestamp: {last_timestamp}")
 
 
@@ -204,7 +207,8 @@ class PVForecast:
                 )
                
                 model_path = "AutogluonModels/ag-20250307_210606/"  
-                predictor = TimeSeriesPredictor.load(model_path)           
+                predictor = TimeSeriesPredictor.load(model_path) 
+                #           
                
                 #Initialize the predictor
                 # predictor = TimeSeriesPredictor(
