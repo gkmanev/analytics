@@ -248,21 +248,21 @@ class PVForecast:
                     timestamp = predict["timestamp"]
                     
                     prediction = predict["0.9"]    
-                    # check if prediction < 5
-                    # if prediction < 10:
-                    #     prediction = 0  
-                    # # if timestamp < 08:00 or timestamp > 20:00
-                    # if timestamp.hour < 8 or timestamp.hour > 20:
-                    #     prediction = 0                                   
-                    # # Check if the datapoint exists
-                    # obj, created = PVForecastModel.objects.update_or_create(
-                    # timestamp=timestamp,
-                    # ppe=self.ppe,
-                    # defaults={
-                    #     'farm': self.farm,
-                    #     'production_forecast': prediction
-                    # }
-                    # )
+                    #check if prediction < 10
+                    if prediction < 10:
+                        prediction = 0  
+                    # if timestamp < 08:00 or timestamp > 20:00
+                    if timestamp.hour < 8 or timestamp.hour > 20:
+                        prediction = 0                                   
+                    # Check if the datapoint exists
+                    obj, created = PVForecastModel.objects.update_or_create(
+                    timestamp=timestamp,
+                    ppe=self.ppe,
+                    defaults={
+                        'farm': self.farm,
+                        'production_forecast': prediction
+                    }
+                    )
                 #predictor.save()
                 # print(f"Model saved: {model_save_path}")
 
