@@ -84,7 +84,7 @@ def today_resample_data(resolution):
 
 def pv_forecast_first_five():    
     first_five_projects = prepare_project_mapping()#[:2] 
-    today = datetime.now().date() - timedelta(days=2)
+    today = datetime.now().date() - timedelta(days=1)
     end_date = today.strftime('%Y-%m-%d')    
     
     for it in first_five_projects:
