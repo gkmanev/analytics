@@ -35,6 +35,7 @@ class PVForecast:
 
 
         url = f'http://209.38.208.230:8000/api/pvmeasurementdata/?start_date={self.start_date}&end_date={self.end_date}&ppe={self.ppe}'
+        print(f"URL: {url}")
 
         # Get the data from the API
         response = requests.get(url=url)
