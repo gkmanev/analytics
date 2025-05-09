@@ -143,16 +143,15 @@ class PVForecast:
         # Drop the rows with missing values
         combined_weather_and_df_dam.dropna(inplace=True)
 
-        combined_weather_and_df_dam = combined_weather_and_df_dam.iloc[:-1]
+        combined_weather_and_df_dam = combined_weather_and_df_dam#.iloc[:-1]
         # Print combined_weather_and_df_dam last row timestamp
-        print(f"Combined weather and df_dam last row timestamp: {combined_weather_and_df_dam['timestamp'].iloc[-1]}")
+        #print(f"Combined weather and df_dam last row timestamp: {combined_weather_and_df_dam['timestamp'].iloc[-1]}")
         return combined_weather_and_df_dam
     
     def prepare_covariates(self):
 
         start_date_val = self.end_date
-        end_date_val = datetime.strptime(self.end_date, '%Y-%m-%d') + timedelta(days=5)
-        end_date_val = end_date_val.strftime('%Y-%m-%d') 
+        end_date_val = self.end_date + timedelta(days=3)        
 
         forecast_df = self.fetch_weather_data(start_date_val, end_date_val, url_weather = "https://api.open-meteo.com/v1/forecast")
 
@@ -161,7 +160,7 @@ class PVForecast:
 
         forecast_df["item_id"] = "series_1"
 
-        forecast_df = forecast_df.iloc[:480]
+        forecast_df = forecast_df.iloc[:288]
 
         future_covariates = TimeSeriesDataFrame.from_data_frame(
             forecast_df,
@@ -199,7 +198,7 @@ class PVForecast:
             print("Error: The DataFrame is empty. Please check the data.")
             return None
         if len(combined_weather_and_df_dam) > 0:
-            if len(future_covariates) == 480:                
+            if len(future_covariates) == 288:                
                 train_data = TimeSeriesDataFrame.from_data_frame(
                     combined_weather_and_df_dam,
                     id_column="item_id",
@@ -212,7 +211,7 @@ class PVForecast:
                 # Initialize the predictor
                 predictor = TimeSeriesPredictor(
                     target=target_column,    
-                    prediction_length=480,
+                    prediction_length=288,
                     freq='15min',
                     known_covariates_names=known_covariates,
                     #path=model_save_path  # Set the path here
@@ -222,7 +221,7 @@ class PVForecast:
                 results = predictor.fit(
                     train_data=train_data,  
                     presets="fast_training",
-                    time_limit=300,
+                    time_limit=600,
                     # hyperparameters={
                     #     "DeepAR": {
                     #         # You can specify DeepAR-specific hyperparameters here
