@@ -34,8 +34,7 @@ class PVForecast:
         # end_date = today.strftime('%Y-%m-%d')
 
 
-        url = f'http://209.38.208.230:8000/api/pvmeasurementdata/?start_date={self.start_date}&end_date={self.end_date}&ppe={self.ppe}'
-        print(f"URL: {url}")
+        url = f'http://209.38.208.230:8000/api/pvmeasurementdata/?start_date={self.start_date}&end_date={self.end_date}&ppe={self.ppe}'       
 
         # Get the data from the API
         response = requests.get(url=url)
@@ -53,9 +52,9 @@ class PVForecast:
 
         # drop all the columns instead of timestamp and production
         df_dam = df_dam[['timestamp', 'production', 'latitude', 'longitude']]
-        if df_dam.isnull().values.any():
-            print("Warning: NaNs detected in the DataFrame. Please fill or drop them.")
-            return None
+        # if df_dam.isnull().values.any():
+        #     print("Warning: NaNs detected in the DataFrame. Please fill or drop them.")
+        #     return None
         return df_dam
 
 
