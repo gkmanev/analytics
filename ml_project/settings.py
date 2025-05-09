@@ -107,7 +107,7 @@ CELERY_BEAT_SCHEDULE = {
     },
     'todaty_correlation_5_10': {
         'task': 'mlapp.tasks.today_correlation_five_to_ten_task',
-        'schedule': crontab(hour=11, minute=56),
+        'schedule': crontab(hour=10, minute=56),
     },
     'schedule_pv_forecast_first_five_task': {
         'task': 'mlapp.tasks.pv_forecast_first_five_task',
