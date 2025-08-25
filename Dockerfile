@@ -2,47 +2,50 @@
 FROM nvidia/cuda:11.6.2-base-ubuntu20.04
 
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV DEBIAN_FRONTEND=noninteractive 
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    DEBIAN_FRONTEND=noninteractive
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
+# System dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake \
     build-essential \
     protobuf-compiler \
     python3 \
     python3-pip \
     python3-dev \
-    tzdata && \
-    ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
-    dpkg-reconfigure -f noninteractive tzdata
+    tzdata \
+ && ln -fs /usr/share/zoneinfo/Etc/UTC /etc/localtime \
+ && dpkg-reconfigure -f noninteractive tzdata \
+ && rm -rf /var/lib/apt/lists/*
 
-# Ensure python3 is the default
-RUN ln -sf /usr/bin/python3 /usr/bin/python \
-    && ln -sf /usr/bin/pip3 /usr/bin/pip  # Use -sf to force overwrite
+# Make python3/pip3 the defaults
+RUN ln -sf /usr/bin/python3 /usr/bin/python && \
+    ln -sf /usr/bin/pip3 /usr/bin/pip
 
-# Set working directory
 WORKDIR /app
 
-# Copy dependencies
+# Dependencies first (better layer caching)
 COPY requirements.txt /app/
 
-# Install Python dependencies
-RUN pip install --upgrade pip && pip install -r requirements.txt 
+# Upgrade pip tooling
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel
 
+# ✅ GPU-enabled PyTorch (CUDA 11.8 wheels) — replaces the CPU-only wheels
+# These wheels bundle the needed CUDA userspace libs; no extra CUDA install needed.
+RUN pip install --no-cache-dir \
+      torch==2.1.2 \
+      torchvision==0.16.2 \
+      --index-url https://download.pytorch.org/whl/cu118
 
+# Other Python deps
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install additional packages
-RUN pip install -U setuptools wheel
+# AutoGluon (will keep your already-installed torch if compatible)
+RUN pip install --no-cache-dir autogluon.timeseries
 
-# Install PyTorch and AutoGluon
-RUN pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cpu
-RUN pip install autogluon.timeseries
-# RUN pip install autogluon==1.2
-
-# Copy project files
+# Copy project
 COPY . /app/
 
-# Set entrypoint
+# Default entrypoint (compose overrides this for the worker)
 CMD ["gunicorn", "ml_project.wsgi:application", "--bind", "0.0.0.0:8000"]

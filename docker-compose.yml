@@ -1,6 +1,6 @@
 version: '3.8'
-services:
 
+services:
   web:
     build:
       context: ./
@@ -14,21 +14,13 @@ services:
       - POSTGRES_PASSWORD=postgres
       - DEBUG=1
       - SECRET_KEY=foo
-      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1, 192.168.1.32, 85.14.6.37, [::1]
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,192.168.1.32,85.14.6.37,[::1]
     depends_on:
       - redis
       - db
     volumes:
-      - .:/code     
+      - .:/app           # was .:/code; /app matches your Dockerfile WORKDIR
     restart: always
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-
 
   db:
     image: postgres:16
@@ -54,20 +46,14 @@ services:
       - POSTGRES_PASSWORD=postgres
       - DEBUG=1
       - SECRET_KEY=foo
-      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,85.14.6.37, 192.168.1.32 [::1]
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,85.14.6.37,192.168.1.32,[::1]   # fixed comma
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
     depends_on:
       - redis
-      - web
       - db
     restart: always
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu]
-
+    gpus: all
 
   celery_beat:
     build:
@@ -79,13 +65,10 @@ services:
       - POSTGRES_PASSWORD=postgres
       - DEBUG=1
       - SECRET_KEY=foo
-      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,85.14.6.37, 192.168.1.32 [::1]
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,85.14.6.37,192.168.1.32,[::1]   # fixed comma
     depends_on:
       - redis
     restart: always
 
 volumes:
   postgres_data_new:
-
-  
-
