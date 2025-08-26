@@ -34,39 +34,40 @@ class performML:
 
     def prepare_power(self):
         response = requests.get(self.url).json()
+        print(self.url)
         print(response)
-        df1 = None
-        date_field_name = "created"
-        if response:
-            df1 = pd.DataFrame(response)
+        # df1 = None
+        # date_field_name = "created"
+        # if response:
+        #     df1 = pd.DataFrame(response)
             
-            #Convert the 'created_date' column to datetime
-            df1['timestamp'] = pd.to_datetime(df1[date_field_name], errors='coerce')
+        #     #Convert the 'created_date' column to datetime
+        #     df1['timestamp'] = pd.to_datetime(df1[date_field_name], errors='coerce')
             
-            #Ensure that 'timestamp' column is in datetime64 format
-            df1['timestamp'] = df1["timestamp"].values.astype('datetime64[m]')
+        #     #Ensure that 'timestamp' column is in datetime64 format
+        #     df1['timestamp'] = df1["timestamp"].values.astype('datetime64[m]')
             
-            df1 = df1[~df1['timestamp'].duplicated(keep='first')]
+        #     df1 = df1[~df1['timestamp'].duplicated(keep='first')]
 
-            # Drop rows where 'timestamp' could not be converted
-            df1.dropna(subset=['timestamp'], inplace=True)
+        #     # Drop rows where 'timestamp' could not be converted
+        #     df1.dropna(subset=['timestamp'], inplace=True)
 
-            # 
+        #     # 
 
-            # Set the timestamp as the index
-            df1.set_index('timestamp', inplace=True)
+        #     # Set the timestamp as the index
+        #     df1.set_index('timestamp', inplace=True)
             
-            # Resample to minute frequency, filling any gaps
+        #     # Resample to minute frequency, filling any gaps
             
-            df1 = df1.resample('min').interpolate(method='linear')
-            df1 = df1.round(2)
-            df1['devId'] = self.devId
-            # Reset index to make timestamp a column again
-            df1.reset_index(inplace=True)        
+        #     df1 = df1.resample('min').interpolate(method='linear')
+        #     df1 = df1.round(2)
+        #     df1['devId'] = self.devId
+        #     # Reset index to make timestamp a column again
+        #     df1.reset_index(inplace=True)        
 
-            columns_to_drop = [date_field_name, 'grid', 'actualCorr', 'actualProviding', 'providingAmount']
-            df1.drop(columns=columns_to_drop, inplace=True, errors='ignore')     
-        return df1
+        #     columns_to_drop = [date_field_name, 'grid', 'actualCorr', 'actualProviding', 'providingAmount']
+        #     df1.drop(columns=columns_to_drop, inplace=True, errors='ignore')     
+        # return df1
         
     
     def process_merge_df(self):
