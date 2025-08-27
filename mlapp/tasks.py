@@ -12,10 +12,12 @@ def today_correlation_task():
     today_correlation_first_five()
     logger.info("ML 1-5 device")
 
-@shared_task
-def today_correlation_five_to_ten_task():
-    today_correlation_five_ten()
-    logger.info("ML 5-10 device")
+@shared_task(bind=True, max_retries=3, default_retry_delay=120)  # 2 minutes
+def today_correlation_task(self):
+    try:
+        today_correlation_first_five()
+    except ValueError as exc:
+        raise self.retry(exc=exc)
 
 
 @shared_task
