@@ -1,12 +1,15 @@
 import requests
 import pandas as pd
 import json
+import logging
+
 from autogluon.timeseries import TimeSeriesDataFrame, TimeSeriesPredictor
 from django.db import transaction
 from mlapp.models import Forecast, Correlation, Feature
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+log = logging.getLogger(__name__)
 
 
 class performML:
@@ -33,35 +36,110 @@ class performML:
         return dfWeather
 
     def prepare_power(self):
-        response = requests.get(self.url).json()        
-        df1 = None
-        if not response:
-            return df1
-        series = None
-        if isinstance(response, dict):
-            series = response.get(self.devId)
-            if series is None and len(response) > 0:
-                series = next(iter(response.values()))
-        elif isinstance(response, list):
-            # Defensive: if the endpoint ever returns just the list (single device)
-            series = response
-        if not series:
-            return df1
-        
-        df1 = pd.DataFrame(series, columns=["timestamp", "power"])
+        """
+        Accepts endpoint payloads like any of:
+        - { "sm-0002": [[ts, val], ...], "sm-0003": [...] }
+        - { "sm-0002": { "timestamps": [...], "values": [...] } }
+        - { "sm-0002": { "data": [[ts, val], ...] } }
+        - [[ts, val], ...]
+        - [{"timestamp": ts, "value": v}, ...]  (or ts/created/created_date, value/power/v)
+        """
+        try:
+            response = requests.get(self.url, timeout=20)
+            payload = response.json()
+        except Exception as e:
+            log.exception("prepare_power: failed to fetch/parse json from %s", getattr(self, "url", "?"))
+            return None
+
+        # 1) choose device series (if mapping of devId -> series)
+        data = None
+        if isinstance(payload, dict):
+            if self.devId in payload:
+                data = payload[self.devId]
+            elif payload:  # fallback to first available series
+                # NOTE: next(iter(...)) yields the value (the "series") for the first key
+                data = next(iter(payload.values()))
+        else:
+            data = payload
+
+        # 2) normalize to list[[timestamp, value], ...]
+        pairs = self._normalize_pairs(data)
+        if not pairs:
+            log.warning("prepare_power: no usable data for devId=%s; type(data)=%s sample=%r",
+                        getattr(self, "devId", None), type(data).__name__, (data[:1] if isinstance(data, list) else data))
+            return None
+
+        # 3) build dataframe
+        df1 = pd.DataFrame(pairs, columns=["timestamp", "power"])
+
+        # 4) timestamps -> datetime64[m] (tz-aware OK; coerced then cast to minute precision UTC-naive)
         df1["timestamp"] = pd.to_datetime(df1["timestamp"], errors="coerce")
         df1.dropna(subset=["timestamp"], inplace=True)
+        if df1.empty:
+            return None
+
         df1["timestamp"] = df1["timestamp"].values.astype("datetime64[m]")
         df1.sort_values("timestamp", inplace=True)
         df1 = df1[~df1["timestamp"].duplicated(keep="first")]
+
+        # 5) resample per-minute and interpolate
+        df1.set_index("timestamp", inplace=True)
+        df1 = df1.resample("min").interpolate(method="linear")
+
+        # 6) tidy
         num_cols = df1.select_dtypes(include="number").columns
-        df1[num_cols] = df1[num_cols].round(2)
+        if len(num_cols):
+            df1[num_cols] = df1[num_cols].round(2)
         df1["devId"] = self.devId
         df1.reset_index(inplace=True)
-        print(df1)
+
         return df1
+    
+    @staticmethod
+    def _normalize_pairs(data):
+        """Return [[timestamp, value], ...] or [] if not recognizable."""
+        if data is None:
+            return []
 
+        # Case: mapping with embedded shapes
+        if isinstance(data, dict):
+            # common wrappers
+            if "data" in data:
+                return performML._normalize_pairs(data["data"])
+            if "timestamps" in data and "values" in data:
+                ts = data["timestamps"] or []
+                vs = data["values"] or []
+                return [[t, v] for t, v in zip(ts, vs)]
+            if "ts" in data and "v" in data:
+                return [[t, v] for t, v in zip(data["ts"] or [], data["v"] or [])]
+            # unexpected dict — not a series
+            return []
 
+        # Case: already a list
+        if isinstance(data, list):
+            if not data:
+                return []
+            first = data[0]
+
+            # list of [ts, val]
+            if isinstance(first, (list, tuple)) and len(first) == 2:
+                return data
+
+            # list of dicts: map likely keys
+            if isinstance(first, dict):
+                ts_key = next((k for k in ("timestamp", "ts", "time", "created", "created_date") if k in first), None)
+                v_key  = next((k for k in ("power", "value", "v", "y") if k in first), None)
+                if ts_key and v_key:
+                    out = []
+                    for row in data:
+                        try:
+                            out.append([row[ts_key], row[v_key]])
+                        except Exception:
+                            continue
+                    return out
+
+        # Anything else: unsupported
+        return []
 
     
     def process_merge_df(self):
