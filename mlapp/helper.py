@@ -160,69 +160,70 @@ class performML:
 
     def corelations(self):
         data = self.process_merge_df()
-        if data is not None and not data.empty:
+        print(data)
+        #if data is not None and not data.empty:
 
             
-            columns_to_drop = ['id', 'lat', 'long', 'devId', 'timestamp']
-            corelation_data = data
-            corelation_data.drop(columns=columns_to_drop, inplace=True, errors='ignore')     
+            # columns_to_drop = ['id', 'lat', 'long', 'devId', 'timestamp']
+            # corelation_data = data
+            # corelation_data.drop(columns=columns_to_drop, inplace=True, errors='ignore')     
             
-            correlation_matrix = corelation_data.corr()
-            # print("Feature correlations:")
-            # print(correlation_matrix)        
-            features = correlation_matrix.columns.tolist()
-            # Create or get Feature objects
-            feature_objs = {name: Feature.objects.get_or_create(name=name)[0] for name in features}                               
+            # correlation_matrix = corelation_data.corr()
+            # # print("Feature correlations:")
+            # # print(correlation_matrix)        
+            # features = correlation_matrix.columns.tolist()
+            # # Create or get Feature objects
+            # feature_objs = {name: Feature.objects.get_or_create(name=name)[0] for name in features}                               
             
-            # Iterate through the correlation matrix and save correlations
-            for feature1 in features:
-                for feature2 in features:
-                    correlation_value = correlation_matrix.loc[feature1, feature2]
-                    print(f"{feature1}, {feature2}, {correlation_value}")
-                    exist = Correlation.objects.filter(devId=self.devId, period=self.period, feature1=feature_objs[feature1], feature2=feature_objs[feature2])
-                    if not exist:
-                        Correlation.objects.create(
-                            feature1=feature_objs[feature1],
-                            feature2=feature_objs[feature2],
-                            correlation_value=round(correlation_value, 2),
-                            devId = self.devId,
-                            period = self.period
-                        )
+            # # Iterate through the correlation matrix and save correlations
+            # for feature1 in features:
+            #     for feature2 in features:
+            #         correlation_value = correlation_matrix.loc[feature1, feature2]
+            #         print(f"{feature1}, {feature2}, {correlation_value}")
+            #         exist = Correlation.objects.filter(devId=self.devId, period=self.period, feature1=feature_objs[feature1], feature2=feature_objs[feature2])
+            #         if not exist:
+            #             Correlation.objects.create(
+            #                 feature1=feature_objs[feature1],
+            #                 feature2=feature_objs[feature2],
+            #                 correlation_value=round(correlation_value, 2),
+            #                 devId = self.devId,
+            #                 period = self.period
+            #             )
 
 
     def time_series_forecast(self):
         
         data = self.process_merge_df()
         
-        if data is not None and not data.empty:
-            train_data = TimeSeriesDataFrame.from_data_frame(
-                data,
-                id_column="devId",
-                timestamp_column="timestamp"
-            )
-            predictor = TimeSeriesPredictor(
-            prediction_length=1600,
-            path="/autogluon",  # Adjust path as needed
-            target="value",
-            eval_metric="MASE",
-            freq='T'  # Specify minute frequency
-            )
-            predictor.fit(
-            train_data,
-            presets="medium_quality",
-            time_limit=240,
-            )
-            predictions = predictor.predict(train_data)
+        # if data is not None and not data.empty:
+        #     train_data = TimeSeriesDataFrame.from_data_frame(
+        #         data,
+        #         id_column="devId",
+        #         timestamp_column="timestamp"
+        #     )
+        #     predictor = TimeSeriesPredictor(
+        #     prediction_length=1600,
+        #     path="/autogluon",  # Adjust path as needed
+        #     target="value",
+        #     eval_metric="MASE",
+        #     freq='T'  # Specify minute frequency
+        #     )
+        #     predictor.fit(
+        #     train_data,
+        #     presets="medium_quality",
+        #     time_limit=240,
+        #     )
+        #     predictions = predictor.predict(train_data)
 
-            for index, row in predictions.iterrows():            
-                timestamp = index[1]                
-                mean_value = round(row['mean'], 2)    
-                print(f"time: {timestamp} || prediction: {mean_value}")        
-                # Create Predictions object
+        #     for index, row in predictions.iterrows():            
+        #         timestamp = index[1]                
+        #         mean_value = round(row['mean'], 2)    
+        #         print(f"time: {timestamp} || prediction: {mean_value}")        
+        #         # Create Predictions object
                 
-                prediction_obj = Forecast(timestamp=timestamp, power=mean_value, devId = self.devId)
-                exist = Forecast.objects.filter(timestamp=timestamp, devId = self.devId)
-                if exist.exists():
-                    pass
-                else:           
-                    prediction_obj.save()
+        #         prediction_obj = Forecast(timestamp=timestamp, power=mean_value, devId = self.devId)
+        #         exist = Forecast.objects.filter(timestamp=timestamp, devId = self.devId)
+        #         if exist.exists():
+        #             pass
+        #         else:           
+        #             prediction_obj.save()
