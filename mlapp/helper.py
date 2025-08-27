@@ -155,7 +155,7 @@ class performML:
             weather_processed_df_trimmed = weather_processed_df[(weather_processed_df['timestamp'] >= common_start_timestamp) & (weather_processed_df['timestamp'] <= common_end_timestamp)].reset_index(drop=True)
 
             merged_df = pd.merge(power_processed_df_trimmed, weather_processed_df_trimmed, on='timestamp', how='inner')   
-        print(merged_df.head())         
+             
         return merged_df
         
 
@@ -196,35 +196,35 @@ class performML:
         
         data = self.process_merge_df()
         
-        # if data is not None and not data.empty:
-        #     train_data = TimeSeriesDataFrame.from_data_frame(
-        #         data,
-        #         id_column="devId",
-        #         timestamp_column="timestamp"
-        #     )
-        #     predictor = TimeSeriesPredictor(
-        #     prediction_length=96,
-        #     path="/autogluon",  # Adjust path as needed
-        #     target="power",
-        #     eval_metric="MASE",
-        #     freq='T'  # Specify minute frequency
-        #     )
-        #     predictor.fit(
-        #     train_data,
-        #     presets="medium_quality",
-        #     time_limit=240,
-        #     )
-        #     predictions = predictor.predict(train_data)
+        if data is not None and not data.empty:
+            train_data = TimeSeriesDataFrame.from_data_frame(
+                data,
+                id_column="devId",
+                timestamp_column="timestamp"
+            )
+            predictor = TimeSeriesPredictor(
+            prediction_length=96,
+            path="/autogluon",  # Adjust path as needed
+            target="power",
+            eval_metric="MASE",
+            freq='15min'  # Specify minute frequency
+            )
+            predictor.fit(
+            train_data,
+            presets="medium_quality",
+            time_limit=240,
+            )
+            predictions = predictor.predict(train_data)
 
-        #     for index, row in predictions.iterrows():            
-        #         timestamp = index[1]                
-        #         mean_value = round(row['mean'], 2)    
-        #         print(f"time: {timestamp} || prediction: {mean_value}")        
-        #         # Create Predictions object
+            for index, row in predictions.iterrows():            
+                timestamp = index[1]                
+                mean_value = round(row['mean'], 2)    
+                print(f"time: {timestamp} || prediction: {mean_value}")        
+                #Create Predictions object
                 
-        #         # prediction_obj = Forecast(timestamp=timestamp, power=mean_value, devId = self.devId)
-        #         # exist = Forecast.objects.filter(timestamp=timestamp, devId = self.devId)
-        #         # if exist.exists():
-        #         #     pass
-        #         # else:           
-        #         #     prediction_obj.save()
+                prediction_obj = Forecast(timestamp=timestamp, power=mean_value, devId = self.devId)
+                exist = Forecast.objects.filter(timestamp=timestamp, devId = self.devId)
+                if exist.exists():
+                    pass
+                else:           
+                    prediction_obj.save()

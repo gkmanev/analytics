@@ -103,7 +103,7 @@ CELERY_BEAT_SCHEDULE = {
 
     'todaty_correlation': {
         'task': 'mlapp.tasks.today_correlation_task',
-        'schedule': crontab(hour=12, minute=30),
+        'schedule': crontab(hour=12, minute=35),
     },
     # # call again after 2 min
     #  'today_correlation_1138': {
