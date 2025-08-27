@@ -196,7 +196,7 @@ class performML:
         
         data = self.process_merge_df()
         
-        if data is not None and not data.empty:
+        if data is not None and len(data) > 193:
             train_data = TimeSeriesDataFrame.from_data_frame(
                 data,
                 id_column="devId",
