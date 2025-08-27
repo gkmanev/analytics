@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 class ForecastViewSet(viewsets.ModelViewSet):
-    queryset = Forecast.objects.all()[:50]
+    queryset = Forecast.objects.all()
     serializer_class = ForecastSerializer
 
     def get_queryset(self):
