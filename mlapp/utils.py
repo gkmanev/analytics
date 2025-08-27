@@ -19,7 +19,7 @@ def today_correlation_first_five():
             lat = v["lat"]
             long = v["long"]
             period = "month"
-            url_dev = f"http://85.14.6.37:16457/api/posts/?date_range=year&resample=year&dev={devId}"
+            url_dev = f"http://85.14.6.37:16457/api/posts/?date_range=year&resample=15min&dev={devId}"
             
             url_weather = f"http://85.14.6.37:16456/api/weather/?date_range=year&lat={lat}&long={long}"
             calc_correlations = performML(url_dev, url_weather, period, devId)
