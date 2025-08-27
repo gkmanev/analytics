@@ -30,7 +30,7 @@ class performML:
             dfWeather = dfWeather[~dfWeather['timestamp'].duplicated(keep='first')]
             dfWeather.dropna(subset=['timestamp'], inplace=True)
             dfWeather.set_index('timestamp', inplace=True)
-            dfWeather = dfWeather.resample('min').interpolate(method='linear')
+            dfWeather = dfWeather.resample('15min').interpolate(method='linear')           
             dfWeather.reset_index(inplace=True)
             dfWeather['timestamp'] = dfWeather["timestamp"].values.astype('datetime64[m]')
         return dfWeather
@@ -160,7 +160,7 @@ class performML:
 
     def corelations(self):
         data = self.process_merge_df()
-        print(data)
+        print(data.head())
         #if data is not None and not data.empty:
 
             
