@@ -53,7 +53,7 @@ services:
       - redis
       - db
     restart: always
-    gpus: all
+    runtime: nvidia
 
   celery_beat:
     build:
