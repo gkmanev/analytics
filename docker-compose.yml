@@ -47,13 +47,10 @@ services:
       - DEBUG=1
       - SECRET_KEY=foo
       - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,85.14.6.37,192.168.1.32,[::1]   # fixed comma
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
     depends_on:
       - redis
       - db
     restart: always
-    gpus: all
 
   celery_beat:
     build:

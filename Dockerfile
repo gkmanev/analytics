@@ -26,7 +26,7 @@ RUN ln -sf /usr/bin/python3 /usr/bin/python && \
 WORKDIR /app
 
 # Dependencies first (better layer caching)
-COPY requirements.txt /app/
+COPY requirements.txt constraints.txt /app/
 
 # Upgrade pip tooling
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel
@@ -41,8 +41,11 @@ RUN pip install --no-cache-dir \
 # Other Python deps
 RUN pip install --no-cache-dir -r requirements.txt
 
-# AutoGluon (will keep your already-installed torch if compatible)
-RUN pip install --no-cache-dir autogluon.timeseries
+# AutoGluon (pin torch/torchvision to CUDA builds to avoid CPU wheel swap)
+RUN pip install --no-cache-dir \
+      --constraint /app/constraints.txt \
+      --extra-index-url https://download.pytorch.org/whl/cu118 \
+      autogluon.timeseries
 
 # Copy project
 COPY . /app/
