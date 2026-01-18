@@ -53,7 +53,10 @@ services:
       - redis
       - db
     restart: always
-    gpus: all
+    device_requests:
+      - driver: nvidia
+        count: all
+        capabilities: [gpu]
 
   celery_beat:
     build:
