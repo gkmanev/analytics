@@ -197,8 +197,7 @@ class performML:
 
     def time_series_forecast(self):
         
-        data = self.process_merge_df()
-        print(data)
+        data = self.process_merge_df()        
         
         if data is not None and len(data) > 193:
             train_data = TimeSeriesDataFrame.from_data_frame(
