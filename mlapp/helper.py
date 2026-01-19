@@ -13,27 +13,28 @@ log = logging.getLogger(__name__)
 
 
 class performML:
-    def __init__(self, url, url_weather, period, devId):
+    def __init__(self, url, devId, weather_df=None):
         self.url = url
-        self.url_weather = url_weather
-        self.period = period
+        self.weather_df = weather_df       
         self.devId = devId
-        # self.merge_df()
+  
 
     def prepare_weather(self):
-        response = requests.get(self.url_weather).json()
-        dfWeather = None
-        if response:
-            dfWeather = pd.DataFrame(response)
-            # Convert the 'created_date' column to datetime
-            dfWeather['timestamp'] = pd.to_datetime(dfWeather['timestamp'], errors='coerce')
-            dfWeather = dfWeather[~dfWeather['timestamp'].duplicated(keep='first')]
-            dfWeather.dropna(subset=['timestamp'], inplace=True)
-            dfWeather.set_index('timestamp', inplace=True)
-            dfWeather = dfWeather.resample('15min').interpolate(method='linear')           
-            dfWeather.reset_index(inplace=True)
-            dfWeather['timestamp'] = dfWeather["timestamp"].values.astype('datetime64[m]')
+        
+        if self.weather_df is None:
+            return None        
+       
+        dfWeather = self.weather_df.copy()
+        dfWeather['timestamp'] = pd.to_datetime(dfWeather['date'], errors='coerce')  # Fixed [code_file:2]
+        dfWeather = dfWeather[~dfWeather['timestamp'].duplicated(keep='first')]
+        dfWeather.dropna(subset=['timestamp'], inplace=True)
+        dfWeather.set_index('timestamp', inplace=True)
+        dfWeather = dfWeather.resample('15T').interpolate(method='linear')  # '15T' avoids deprecation
+        dfWeather.reset_index(inplace=True)
+        dfWeather['timestamp'] = dfWeather['timestamp'].dt.floor('min')  # Cleaner minute precision
+        
         return dfWeather
+
 
     def prepare_power(self):
         """
@@ -45,6 +46,7 @@ class performML:
         - [{"timestamp": ts, "value": v}, ...]  (or ts/created/created_date, value/power/v)
         """
         try:
+            
             response = requests.get(self.url, timeout=20)
             payload = response.json()
         except Exception as e:
@@ -64,6 +66,7 @@ class performML:
 
         # 2) normalize to list[[timestamp, value], ...]
         pairs = self._normalize_pairs(data)
+        
         if not pairs:
             log.warning("prepare_power: no usable data for devId=%s; type(data)=%s sample=%r",
                         getattr(self, "devId", None), type(data).__name__, (data[:1] if isinstance(data, list) else data))
@@ -92,7 +95,7 @@ class performML:
             df1[num_cols] = df1[num_cols].round(2)
         df1["devId"] = self.devId
         df1.reset_index(inplace=True)
-
+        
         return df1
     
     @staticmethod
@@ -195,6 +198,7 @@ class performML:
     def time_series_forecast(self):
         
         data = self.process_merge_df()
+        print(data)
         
         if data is not None and len(data) > 193:
             train_data = TimeSeriesDataFrame.from_data_frame(
