@@ -105,11 +105,11 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'mlapp.tasks.today_correlation_task',
         'schedule': crontab(hour=4, minute=43),
     },
-    # # call again after 2 min
-    #  'today_correlation_1138': {
-    #     'task': 'mlapp.tasks.today_correlation_task',
-    #     'schedule': crontab(hour=11, minute=46),
-    # },
+    # call again after 2 min
+     'today_correlation_1138': {
+        'task': 'mlapp.tasks.today_correlation_task',
+        'schedule': crontab(hour=10, minute=25),
+    },
     'todaty_correlation_5_10': {
         'task': 'mlapp.tasks.today_correlation_five_to_ten_task',
         'schedule': crontab(hour=2, minute=0),
