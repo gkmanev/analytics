@@ -20,6 +20,8 @@ def today_correlation_first_five():
         start = date(date.today().year, 1, 1)
         # today at 00:00
         end = datetime.combine(date.today(), datetime.min.time())
+        start_str = start.strftime("%Y-%m-%d")
+        end_str = end.strftime("%Y-%m-%d")
     
     for dev in coords[1:12]:
         for k,v in dev.items():
@@ -27,7 +29,7 @@ def today_correlation_first_five():
             lat = v["lat"]
             long = v["long"]        
             url_dev = f"http://85.14.6.37:16455/api/posts/?date_range=month&resample=15min&dev={devId}"
-            weather_df = fetch_weather_data(start, end, lat, long)  
+            weather_df = fetch_weather_data(start_str, end_str, lat, long)  
                    
             # calc_correlations = performML(url_dev, url_weather, period, devId)
             # calc_correlations.corelations()
