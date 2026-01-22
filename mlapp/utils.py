@@ -1,6 +1,6 @@
 from mlapp.helper import performML
 from mlapp.models import Forecast
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from pytz import timezone
 import os
 import json
@@ -16,14 +16,16 @@ def today_correlation_first_five():
     file_path = os.path.join('mlapp', 'coords.json')
     with open(file_path, 'r') as file:
         coords = json.load(file)
+        # beginning of current year
+        start = date(date.today().year, 1, 1)
+        # today at 00:00
+        end = datetime.combine(date.today(), datetime.min.time())
     
     for dev in coords[1:12]:
         for k,v in dev.items():
             devId = k 
             lat = v["lat"]
-            long = v["long"]
-            start = '2026-01-01'
-            end = '2026-01-19'
+            long = v["long"]        
             url_dev = f"http://85.14.6.37:16455/api/posts/?date_range=month&resample=15min&dev={devId}"
             weather_df = fetch_weather_data(start, end, lat, long)  
                    
